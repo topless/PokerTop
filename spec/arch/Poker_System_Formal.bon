@@ -1,0 +1,33 @@
+system_chart POKER_SYSTEM
+    indexing
+        author: "Chris";
+    explanation
+        "This hopefully will be a fully functional funny NL Texas Hold 'Em poker application."
+    cluster POKER_PLAYER description "Player cluster."
+    cluster UTILITIES description "Utilities to implement functionality such as initilization."
+    cluster POKER_TABLE description "Table cluster."  
+end
+
+static_diagram POKER_SYSTEM
+component 
+    cluster POKER_PLAYER
+    component
+        class PLAYER
+            feature
+                name: VALUE  -- Player's name in order to distinguish them on the table.
+        end --class NAME
+    end --cluster POKER_PLAYER
+
+    cluster POKER_TABLE
+    component
+        class TABLE
+            feature
+                size: INTEGER -- Size of the poker table.    
+        end -- class TABLE        
+    end -- cluster POKER_TABLE
+    
+    cluster UTILITIES
+    component
+    end -- cluster UTILITIES
+    
+end-- cluster SYSTEM

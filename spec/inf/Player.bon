@@ -1,0 +1,81 @@
+class_chart PLAYER
+indexing
+    in_cluster: "POKER_PLAYER";
+explanation
+    "Defines a player."
+query
+    "Who am I?",
+    "How much money do I have?",
+    "Where am I sitting?",
+    -- A bit optimistic for design time - Aiming high!
+    "My statistics?"
+command
+    "Set Name.",
+    "Set Bank."
+end
+
+-- There is redundancy between player and name, query and command, I will resolve it a later stage.
+class_chart NAME
+indexing
+    in_cluster: "POKER_PLAYER";
+explanation
+    "Player's name. Used to identify players."
+query
+    "Who am I?"
+command
+    "Set Name."
+constraint
+    "Need to be unique string. Used as ID"
+end
+
+class_chart BANK
+indexing
+    in_cluster: "POKER_PLAYER";
+explanation
+    "Player's amount of money."
+query
+    "How much money do I have?"
+command
+    "Add.",
+    "Subtract."
+constraint
+    "Need to be legal amount"
+end
+
+class_chart CARDS
+indexing
+    in_cluster: "POKER_PLAYER";
+explanation
+    "The two initial cards for every hand."
+query
+    "What are my cards?"
+command
+    "Set Cards."
+constraint
+    "Any two cards from the deck."
+end
+
+class_chart POKER_HAND
+indexing
+    in_cluster: "POKER_PLAYER";
+explanation
+    "The best out of five playing cards."
+query
+    "Whats the best combination I get?"
+command
+    "Show hand."
+constraint
+    "Requires game status to be showdown."
+end
+
+
+class_chart CHANGE_GAME_STATE
+indexing
+    in_cluster: "POKER_PLAYER";
+explanation
+    "In his turn each player after action has to define to system that game has to move on."
+query
+    "Is it my turn?"
+command
+    "Update game state."
+end

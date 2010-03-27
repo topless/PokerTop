@@ -1,0 +1,77 @@
+system_chart POKER_SYSTEM
+    indexing
+        author: "Chris";
+    explanation
+        "This hopefully will be a fully functional funny NL Texas Hold 'Em poker application."
+    cluster POKER_PLAYER description "Player cluster."
+    cluster UTILITIES description "Utilities to implement functionality such as initilization."
+    cluster POKER_TABLE description "Table cluster."  
+end
+
+cluster_chart POKER_PLAYER
+    -- class charts in Player.bon
+    explanation
+        "Cluster that holds all the structures for the player."
+    class PLAYER description "Instance of a player."
+    class NAME description "Player's name."
+    class BANK description "Player's amount of money."
+    class CARDS description "Player's starting cards."
+    class POKER_HAND description "The best out of five cards."
+    class CHANGE_GAME_STATE description "Changes state of the game with a valid move."
+    cluster ACTION description "Part tha takes care about all possible player's actions."
+end
+
+cluster_chart ACTION
+    indexing
+        in_cluster: "POKER_PLAYER";
+    explanation
+        "This cluster is fully responsible for every possible action of the player."
+    -- class charts in Actions.bon
+    class FOLD  description "Fold action."
+    class STAY  description "Stay action."
+    class RAISE  description "Raise action."
+    class CALL description "Calling a bet action."
+end
+
+cluster_chart POKER_TABLE
+    explanation
+        "Cluster that holds all the structures for the table"
+    class TABLE description "Instance of a table."        
+    class GAME_STATE description "Part that keeps track of the game status."
+    class SEAT description "Represents a seat at the table."
+    class MAX_NUMBER_OF_SEATS description "Size of the table."
+    class ALL_SEATS description "List of all the seats of table."
+    class HISTORY description "History of every hand played at this table."
+    cluster TABLE_ACTIONS description "Part that is responsible for all table actions from dealer aspect."
+end
+
+cluster_chart TABLE_ACTIONS 
+    -- class charts in Poker_Table.bon
+    explanation
+        "Representation of all the actions at the table."
+    class DEALER description "Dealer of the game."
+    class POT description "Current pot."
+    class ANTE description "Value of ante."
+    class BLIND description "Value of blinds."
+    class CARD description "Representation of one card."
+    class DECK description "Initial Deck of 52 cards."
+    class BUTTON description "The player who will be dealt the last card."
+end
+
+cluster_chart UTILITIES
+    -- class charts in Utilities.bon
+    class RANDOM_GENERATOR description "Facility for generating random numbers."
+    class INPUT_HANDLING description "Facility for input handling."
+    class PRINT_HANDLING description "Facility for printing."
+    class LOG_HANDLING description "Facility for logging."
+end
+
+cluster POKER_PLAYER
+component
+    deferred class ALARM -- An alarm that is either on or off.
+    feature
+        deferred on  -- Turn this alarm on.
+        ensure
+            is_on();
+        end
+end

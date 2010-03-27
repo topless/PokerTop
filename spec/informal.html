@@ -1,0 +1,738 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=iso-8859-1" />
+
+<title>BON Documentation: POKER_SYSTEM</title>
+
+<script type="text/javascript">
+<!--
+
+var items = ['system_chart:POKER_SYSTEM','cluster_chart:TABLE_ACTIONS','cluster_chart:POKER_PLAYER','cluster_chart:UTILITIES','cluster_chart:ACTION','cluster_chart:POKER_TABLE','cluster_chart:POKER_SYSTEM'];
+var topOptions = [ 'System Chart', 'system_chart', 'Cluster Charts', 'cluster_chart' ];
+var subOptions = [];
+subOptions['system_chart'] = [ 'POKER_SYSTEM', 'system_chart:POKER_SYSTEM' ];
+subOptions['cluster_chart'] = [ 'ACTION','cluster_chart:ACTION','POKER_PLAYER','cluster_chart:POKER_PLAYER','POKER_SYSTEM','cluster_chart:POKER_SYSTEM','POKER_TABLE','cluster_chart:POKER_TABLE','TABLE_ACTIONS','cluster_chart:TABLE_ACTIONS','UTILITIES','cluster_chart:UTILITIES' ];
+
+
+var showAll = false;
+var sysTitle = 'system_title';
+var topMenu = 'top-menu';
+var subMenu = 'sub-menu';
+
+function setElText(id,text) {
+  var elem = document.getElementById(id);
+  if (elem) {
+    elem.innerHTML = text;
+  }
+}
+
+function toggleShowAll() {
+  showAll = !showAll;
+  if (showAll) {
+    displayAll();
+    setElText('showlink', 'Show One');
+  } else {
+    hideAll();
+    setElText('showlink', 'Show All');
+  }
+  showSelected();
+  return false;
+}
+
+function select(id) {
+  if (showAll) {
+//    setHash(id);
+    return true;
+  } else {
+    showOnly(id);
+    return true;
+  }
+}
+
+function showOnly(id) {
+  var elem = document.getElementById(id);
+  if (elem) {
+    hideAll();
+    showElem(id);
+  }
+}
+
+function hideAll() {
+  for (var i=0; i<items.length; i++) {
+    hideElem(items[i]);
+  }
+}
+
+function displayAll() {
+  for (var i=0; i<items.length; i++) {
+    showElem(items[i]);
+  }
+}
+
+function showElem(id) {
+  var elem = document.getElementById(id);
+  if (elem) {
+    show(elem);
+  }
+}
+
+function hideElem(id) {
+  var elem = document.getElementById(id);
+  if (elem) {
+    hide(elem);
+  }
+}
+
+function hide(elem) {
+  addClass(elem,'hidden');
+}
+
+function show(elem) {
+  removeClass(elem,'hidden');
+}
+
+function addClass(elem,cName) {
+  if (!elem.className) {
+    elem.className = cName;
+  } else if (elem.className.indexOf(cName) == -1) {
+    elem.className += ' ' + cName;
+  }
+}
+
+function removeClass(elem,cName) {
+  if (elem.className) {
+    var toReplace = elem.className.match(' ' + cName);
+    elem.className = elem.className.replace(toReplace, '');
+  }
+}
+
+function setBack(id) {
+//Not yet...
+}
+
+function initialPopulate() {
+  var topSelect = document.getElementById(topMenu);
+  if (topSelect) {
+    topSelect.options.length = 0;
+    for (var i=0; i < topOptions.length; i+=2) {
+      topSelect.options[i/2] = new Option(topOptions[i],topOptions[i+1]);
+    }
+  }
+  if (window.location.hash) {
+    hashSelect(window.location.hash.substr(1));    
+  } else {
+    populate();
+    showSelected();
+  }
+  lastHash = window.location.hash;
+  //Trigger checkHash
+  setInterval(checkHash,100);
+}
+
+function hashSelect(hash) {
+  var parts = hash.split(':');
+  if (parts.length == 2) {
+    linkSelect(parts[0],hash);
+  } else {
+    populate();
+  }
+}
+
+var lastHash = '';
+
+function checkHash() {
+
+  if (window.location.hash) {
+    if (window.location.hash != lastHash) {
+      hashSelect(window.location.hash.substr(1));
+      lastHash = window.location.hash;
+    }
+  }
+}
+
+function setHash(hash) {
+  lastHash = '#' + hash;
+  window.location.hash = hash;
+}
+
+function populate() {
+
+  var subSelect = document.getElementById(subMenu);
+  var topSelect = document.getElementById(topMenu);
+
+  if (subSelect && topSelect) {
+    var selected = topSelect.options[topSelect.selectedIndex].value;
+    if (selected) {
+      var chosenSubOptions = subOptions[selected];
+      subSelect.options.length = 0;
+      for (var i=0; i < chosenSubOptions.length; i+=2) {
+        subSelect.options[i/2] = new Option(chosenSubOptions[i],chosenSubOptions[i+1]);
+      }
+    }
+  }
+}
+
+function showSelected() {
+  var subSelect = document.getElementById(subMenu);
+  if (subSelect) {
+    var selected = subSelect.options[subSelect.selectedIndex].value;
+    if (selected) {
+      select(selected);
+      setHash(selected);
+    }
+  }
+}
+
+function linkSelect(top, sub) {
+  var topSelect = document.getElementById(topMenu);
+  if (topSelect) {
+    for (var i=0; i < topSelect.options.length; i++) {
+      if (topSelect.options[i].value == top) {
+        topSelect.selectedIndex = i;
+        break;
+      }
+    }
+  }  
+  populate();
+  var subSelect = document.getElementById(subMenu);
+  if (subSelect) {
+    for (var i=0; i < subSelect.options.length; i++) {
+      if (subSelect.options[i].value == sub) {
+        subSelect.selectedIndex = i;
+        showSelected();
+        return false;
+      }
+    }
+    showSelected();
+  }
+  return true;
+}
+
+
+//-->
+</script>
+
+<style type="text/css">
+
+.hidden {
+  position:absolute;
+  left:0px;
+  top:-500px;
+  width:1px;
+  height:1px;
+  overflow:hidden;
+}
+
+body {
+  font-family: Optima, "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Helvetica, Arial, sans-serif;
+}
+
+.list-entry {
+  margin-left: 5px;
+}
+
+a {
+  text-decoration: none;
+  color: blue;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:active {
+  text-decoration: none;
+}
+
+#main {
+  padding-bottom: 100px;
+}
+
+#footer {
+  z-index: 1;
+  position: fixed; 
+  bottom: 0px;
+  right: 0px; 
+  width: 100%;
+  border-top: 2px solid #000000;
+  background-color: #cccccc;
+}
+
+#left-footer {
+  margin-top: 5px;
+  margin-bottom: 0px;
+  font-weight: bold;
+}
+
+#left-footer select {
+  margin-right: 10px;
+  font-size: 1.1em;
+}
+
+#showlink {
+  margin-left: 10px;
+  margin-right: 10px;
+  font-weight: bold;
+  font-size: 1.1em;
+  min-width: 125px;
+}
+
+#top-menu {
+  min-width: 160px;
+}
+
+#sub-menu {
+  min-width: 220px;
+}
+
+#right-footer {
+  margin: 5px 5px 0px 0px;
+  padding: 0;
+  text-align: right;
+}
+
+#footer a {
+  text-decoration: none;
+  font-weight: bold;
+}
+
+dl {
+  margin: 0 0 0 10px;
+}
+
+dd {
+  margin-left: 20px;
+} 
+
+.scenario_entry dt {
+  font-weight: bold;
+}
+
+.indexing dt, .explanation dt {
+  font-variant: small-caps;
+  letter-spacing: 1px;
+}
+
+.top-level {
+  width: 98%;
+  margin: auto;
+}
+
+.outer {
+  width: 100%;
+  background-color: #a2a2a2;
+  border: 2px solid #000000;
+  margin-bottom: 30px;
+}
+
+.type, .name, .part {
+  border: 4px groove #c0c0c0;
+  padding: 5px 0px 5px 0px;
+  text-align: center;
+}
+
+.explanation, .indexing {
+  padding: 5px 5px 5px 10px;
+  background-color: #ffffff;
+  vertical-align: top;
+  border: 4px groove #c0c0c0;
+  padding: 5px 0px 5px 0px;
+}
+
+.name {
+  background-color: #f3f0f0;
+  font-size: 1.1em;
+}
+
+.part {
+  background-color: #cccccc;
+}
+
+.type, .part {
+  width: 25%;
+}
+
+.type {
+  background-color: #bcbcbc;
+}
+
+.name, .indexing, .explanation {
+  width: 50%;
+}
+
+.top, .middle, .bottom {
+  width: 100%;
+}
+
+.bottom table {
+  border: 4px groove #c0c0c0;
+  width: 100%;
+}
+
+.bottom tr {
+  width: 100%;
+}
+
+.bottom td, .bottom th {
+  border: 1px inset #c0c0c0;
+  vertical-align: top;
+  padding: 8px 20px 8px 20px;
+}
+
+.spaced-lines {
+  line-height: 1.5em;
+}
+
+.white {
+  background-color: #ffffff;
+}
+
+.light-grey {
+  background-color: #f3f0f0;
+}
+
+.grey {
+  background-color: #cccccc;
+}
+</style>
+
+</head>
+<body onload="initialPopulate();">
+
+<div id="main">
+
+<div class="top-level" id="system_chart:POKER_SYSTEM">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">SYSTEM</th>
+      <td class="name" colspan="2">POKER_SYSTEM</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Purpose</dt>
+          <dd>&quot;This hopefully will be a fully functional funny NL Texas Hold 'Em poker application.&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>author : "Chris";</dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="grey">Cluster</th>
+            <th class="grey">Description</th>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#cluster_chart:POKER_PLAYER" onclick="return linkSelect('cluster_chart','cluster_chart:POKER_PLAYER');">POKER_PLAYER</a></td>
+            <td class="white">&quot;Player cluster.&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#cluster_chart:UTILITIES" onclick="return linkSelect('cluster_chart','cluster_chart:UTILITIES');">UTILITIES</a></td>
+            <td class="white">&quot;Utilities to implement functionality such as initilization.&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#cluster_chart:POKER_TABLE" onclick="return linkSelect('cluster_chart','cluster_chart:POKER_TABLE');">POKER_TABLE</a></td>
+            <td class="white">&quot;Table cluster.&quot;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="cluster_chart:POKER_PLAYER">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLUSTER</th>
+      <td class="name" colspan="2">POKER_PLAYER</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Purpose</dt>
+          <dd>&quot;Cluster that holds all the structures for the player.&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="grey">Class</th>
+            <th class="grey">Description</th>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:PLAYER" onclick="return linkSelect('class_chart','class_chart:PLAYER');">PLAYER</a></td>
+            <td class="white">&quot;Instance of a player.&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:NAME" onclick="return linkSelect('class_chart','class_chart:NAME');">NAME</a></td>
+            <td class="white">&quot;Player's name.&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:BANK" onclick="return linkSelect('class_chart','class_chart:BANK');">BANK</a></td>
+            <td class="white">&quot;Player's amount of money.&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:CARDS" onclick="return linkSelect('class_chart','class_chart:CARDS');">CARDS</a></td>
+            <td class="white">&quot;Player's starting cards.&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:POKER_HAND" onclick="return linkSelect('class_chart','class_chart:POKER_HAND');">POKER_HAND</a></td>
+            <td class="white">&quot;The best out of five cards.&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:CHANGE_GAME_STATE" onclick="return linkSelect('class_chart','class_chart:CHANGE_GAME_STATE');">CHANGE_GAME_STATE</a></td>
+            <td class="white">&quot;Changes state of the game with a valid move.&quot;</td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <th>Cluster</th>
+            <th>Description</th>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#cluster_chart:ACTION" onclick="return linkSelect('cluster_chart','cluster_chart:ACTION');">ACTION</a></td>
+            <td class="white">&quot;Part tha takes care about all possible player's actions.&quot;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="cluster_chart:ACTION">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLUSTER</th>
+      <td class="name" colspan="2">ACTION</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Purpose</dt>
+          <dd>&quot;This cluster is fully responsible for every possible action of the player.&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+          <dd>in_cluster : "POKER_PLAYER";</dd>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="grey">Class</th>
+            <th class="grey">Description</th>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:FOLD" onclick="return linkSelect('class_chart','class_chart:FOLD');">FOLD</a></td>
+            <td class="white">&quot;Fold action.&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:STAY" onclick="return linkSelect('class_chart','class_chart:STAY');">STAY</a></td>
+            <td class="white">&quot;Stay action.&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:RAISE" onclick="return linkSelect('class_chart','class_chart:RAISE');">RAISE</a></td>
+            <td class="white">&quot;Raise action.&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:CALL" onclick="return linkSelect('class_chart','class_chart:CALL');">CALL</a></td>
+            <td class="white">&quot;Calling a bet action.&quot;</td>
+          </tr>
+        </table>
+              </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="cluster_chart:POKER_TABLE">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLUSTER</th>
+      <td class="name" colspan="2">POKER_TABLE</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Purpose</dt>
+          <dd>&quot;Cluster that holds all the structures for the table&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="grey">Class</th>
+            <th class="grey">Description</th>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:TABLE" onclick="return linkSelect('class_chart','class_chart:TABLE');">TABLE</a></td>
+            <td class="white">&quot;Instance of a table.&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:GAME_STATE" onclick="return linkSelect('class_chart','class_chart:GAME_STATE');">GAME_STATE</a></td>
+            <td class="white">&quot;Part that keeps track of the game status.&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:SEAT" onclick="return linkSelect('class_chart','class_chart:SEAT');">SEAT</a></td>
+            <td class="white">&quot;Represents a seat at the table.&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:MAX_NUMBER_OF_SEATS" onclick="return linkSelect('class_chart','class_chart:MAX_NUMBER_OF_SEATS');">MAX_NUMBER_OF_SEATS</a></td>
+            <td class="white">&quot;Size of the table.&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:ALL_SEATS" onclick="return linkSelect('class_chart','class_chart:ALL_SEATS');">ALL_SEATS</a></td>
+            <td class="white">&quot;List of all the seats of table.&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:HISTORY" onclick="return linkSelect('class_chart','class_chart:HISTORY');">HISTORY</a></td>
+            <td class="white">&quot;History of every hand played at this table.&quot;</td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <th>Cluster</th>
+            <th>Description</th>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#cluster_chart:TABLE_ACTIONS" onclick="return linkSelect('cluster_chart','cluster_chart:TABLE_ACTIONS');">TABLE_ACTIONS</a></td>
+            <td class="white">&quot;Part that is responsible for all table actions from dealer aspect.&quot;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="cluster_chart:TABLE_ACTIONS">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLUSTER</th>
+      <td class="name" colspan="2">TABLE_ACTIONS</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Purpose</dt>
+          <dd>&quot;Representation of all the actions at the table.&quot;</dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="grey">Class</th>
+            <th class="grey">Description</th>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:DEALER" onclick="return linkSelect('class_chart','class_chart:DEALER');">DEALER</a></td>
+            <td class="white">&quot;Dealer of the game.&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:POT" onclick="return linkSelect('class_chart','class_chart:POT');">POT</a></td>
+            <td class="white">&quot;Current pot.&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:ANTE" onclick="return linkSelect('class_chart','class_chart:ANTE');">ANTE</a></td>
+            <td class="white">&quot;Value of ante.&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:BLIND" onclick="return linkSelect('class_chart','class_chart:BLIND');">BLIND</a></td>
+            <td class="white">&quot;Value of blinds.&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:CARD" onclick="return linkSelect('class_chart','class_chart:CARD');">CARD</a></td>
+            <td class="white">&quot;Representation of one card.&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:DECK" onclick="return linkSelect('class_chart','class_chart:DECK');">DECK</a></td>
+            <td class="white">&quot;Initial Deck of 52 cards.&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:BUTTON" onclick="return linkSelect('class_chart','class_chart:BUTTON');">BUTTON</a></td>
+            <td class="white">&quot;The player who will be dealt the last card.&quot;</td>
+          </tr>
+        </table>
+              </td>
+    </tr>
+  </table>
+</div>
+
+<div class="top-level" id="cluster_chart:UTILITIES">
+  <table class="outer">
+    <tr class="top">
+      <th class="type">CLUSTER</th>
+      <td class="name" colspan="2">UTILITIES</td>
+      <td class="part"><strong>Part:</strong> 1/1</td>
+    </tr>
+    <tr class="middle">
+      <td class="explanation" colspan="2">
+        <dl>
+          <dt>Purpose</dt>
+          <dd></dd>
+        </dl>
+      </td>
+      <td class="indexing" colspan="2">
+        <dl>
+          <dt>Indexing</dt>
+        </dl>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4" class="bottom">
+        <table>
+          <tr>
+            <th class="grey">Class</th>
+            <th class="grey">Description</th>
+          </tr>
+          <tr>
+            <td class="light-grey"><a href="#class_chart:RANDOM_GENERATOR" onclick="return linkSelect('class_chart','class_chart:RANDOM_GENERATOR');">RANDOM_GENERATOR</a></td>
+            <td class="white">&quot;Facility for generating random numbers.&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:INPUT_HANDLING" onclick="return linkSelect('class_chart','class_chart:INPUT_HANDLING');">INPUT_HANDLING</a></td>
+            <td class="white">&quot;Facility for input handling.&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:PRINT_HANDLING" onclick="return linkSelect('class_chart','class_chart:PRINT_HANDLING');">PRINT_HANDLING</a></td>
+            <td class="white">&quot;Facility for printing.&quot;</td>
+          </tr>          <tr>
+            <td class="light-grey"><a href="#class_chart:LOG_HANDLING" onclick="return linkSelect('class_chart','class_chart:LOG_HANDLING');">LOG_HANDLING</a></td>
+            <td class="white">&quot;Facility for logging.&quot;</td>
+          </tr>
+        </table>
+              </td>
+    </tr>
+  </table>
+</div>
+
+<div id="footer">
+  <p id="left-footer">
+    <button id="showlink" onclick="return toggleShowAll();">Show all</button>
+    Chart type:
+    <select id="top-menu" onchange="populate(); showSelected();"><option>processing...</option></select>
+    Chart:
+    <select id="sub-menu" onchange="showSelected();"><option>processing...</option></select>
+  </p>
+  <p id="right-footer">
+    Generated by <a href="http://kind.ucd.ie/products/opensource/BONc">BONc</a> (version: bonc-0.2.6) <a href="http://validator.w3.org/check?uri=referer">XHTML</a> output, Mar 26, 2010 1:24:54 PM.
+  </p>
+</div>
+
+</div> <!-- End main -->
+
+</body>
+</html>
+

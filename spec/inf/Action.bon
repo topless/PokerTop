@@ -1,0 +1,51 @@
+-- Charts for cluster ACTION
+-- I am not quite sure if constraints are quite necessary,
+-- they might get removed in a later stage. 
+class_chart CALL
+indexing
+    in_cluster: "ACTION";
+explanation
+    "Paying an existing bet in order to stay in the hand."
+command
+    "Pay bet.",
+    "Next player."    
+constraint
+    "Need to be in the hand."
+end
+
+class_chart FOLD
+indexing
+  in_cluster: "ACTION";
+explanation
+    "Represents the action of fold, someone is no longer part of the hand."
+command
+    "Fold current hand.",
+    "Next player."    
+constraint
+    "Need to be in the hand. And his turn."
+end
+
+class_chart STAY
+indexing
+    in_cluster: "ACTION";
+explanation
+    "Staying to current pot without betting or folding."
+command
+    "Next player."
+constraint
+    "Need to be in the hand. And his turn."
+end
+
+class_chart RAISE
+indexing
+    in_cluster: "ACTION";
+explanation
+    "Action of betting or raising the amount of previous bet."
+command
+    "Set the raise bet",
+    "Next player."
+constraint
+    "Bet has to be greater than the big blind. \
+    \ Need to be in the hand. And his turn."
+end
+
