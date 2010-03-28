@@ -12,22 +12,58 @@ static_diagram POKER_SYSTEM
 component 
     cluster POKER_PLAYER
     component
+        class BANK
+        indexing
+            about: "The bank of each player."
+        feature{NONE}
+            amount: REAL -- Players amount of money
+            
+            make_bank: BANK -- Create a new initialised bank object
+			ensure
+			    Result.amount >= 0;
+    		    --Result.amount = REAL;
+			end
+        end --class BANK
+         
         class PLAYER
-            feature
-                name: VALUE  -- Player's name in order to distinguish them on the table.
-        end --class NAME
-    end --cluster POKER_PLAYER
-
+        indexing
+            about: "A poker player";
+        feature
+            name: VALUE  -- Player's name in order to distinguish them on the table.
+                
+        end -- class PLAYER
+        
+    end -- cluster POKER_PLAYER
+    
     cluster POKER_TABLE
     component
         class TABLE
             feature
-                size: INTEGER -- Size of the poker table.    
+                size: INTEGER -- Size of the poker table.
         end -- class TABLE        
     end -- cluster POKER_TABLE
     
     cluster UTILITIES
     component
+        class RANDOM_GENERATOR
+            feature
+                input: VALUE
+        end -- RANDOM_GENERATOR
+        
+        class INPUT_HANDLING
+            feature
+                input: VALUE
+        end -- INPUT_HANDLING
+        
+        class PRINT_HANDLING
+            feature
+                input: VALUE
+        end -- PRINT_HANDLING
+        
+        class LOG_HANDLING
+            feature
+                input: VALUE
+        end -- LOG_HANDLING
     end -- cluster UTILITIES
     
 end-- cluster SYSTEM

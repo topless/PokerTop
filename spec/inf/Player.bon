@@ -14,20 +14,6 @@ command
     "Set Bank."
 end
 
--- There is redundancy between player and name, query and command, I will resolve it a later stage.
-class_chart NAME
-indexing
-    in_cluster: "POKER_PLAYER";
-explanation
-    "Player's name. Used to identify players."
-query
-    "Who am I?"
-command
-    "Set Name."
-constraint
-    "Need to be unique string. Used as ID"
-end
-
 class_chart BANK
 indexing
     in_cluster: "POKER_PLAYER";
@@ -66,16 +52,4 @@ command
     "Show hand."
 constraint
     "Requires game status to be showdown."
-end
-
-
-class_chart CHANGE_GAME_STATE
-indexing
-    in_cluster: "POKER_PLAYER";
-explanation
-    "In his turn each player after action has to define to system that game has to move on."
-query
-    "Is it my turn?"
-command
-    "Update game state."
 end

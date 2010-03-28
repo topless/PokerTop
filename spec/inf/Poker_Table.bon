@@ -82,10 +82,10 @@ constraint
     "Needs to be unique (Singleton)."
 end
 
--- Class charts for TABLE_ACTIONS
+-- Class charts for TABLE_ACTION
 class_chart DEALER
 indexing
-    in_cluster: "TABLE_ACTIONS";
+    in_cluster: "TABLE_ACTION";
 explanation
     "Dealer is responsible for handling all the table actions."
 query
@@ -105,7 +105,7 @@ end
 
 class_chart BUTTON
 indexing
-    in_cluster: "TABLE_ACTIONS";
+    in_cluster: "TABLE_ACTION";
 explanation
     "A player will represent the dealer in each hand."
 query
@@ -118,7 +118,7 @@ end
 
 class_chart DECK
 indexing
-    in_cluster: "TABLE_ACTIONS";
+    in_cluster: "TABLE_ACTION";
 explanation
     "Represent the deck of 52 cards."
 query
@@ -136,7 +136,7 @@ end
 
 class_chart CARD
 indexing
-    in_cluster: "TABLE_ACTIONS";
+    in_cluster: "TABLE_ACTION";
 explanation
     "Represents on card."
 query
@@ -151,7 +151,7 @@ end
 
 class_chart POT
 indexing
-    in_cluster: "TABLE_ACTIONS";
+    in_cluster: "TABLE_ACTION";
 explanation
     "Represents the pot."
 query
@@ -162,3 +162,28 @@ constraint
     "No need for uniqueness there are several occassions for side pots."
 end
 
+class_chart BLIND
+indexing
+    in_cluster: "TABLE_ACTION";
+explanation
+    "Level of the blind."
+query
+    "What is the current level?"
+command
+    "Increase blind."
+constraint
+    "New blind value > old blind value."
+end
+
+class_chart ANTE
+indexing
+    in_cluster: "TABLE_ACTION";
+explanation
+    "Value of ante."
+query
+    "What is the current ante?"
+command
+    "Increase ante."
+constraint
+    "New ante value > old ante value."
+end

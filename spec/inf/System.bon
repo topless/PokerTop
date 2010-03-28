@@ -13,20 +13,18 @@ cluster_chart POKER_PLAYER
     explanation
         "Cluster that holds all the structures for the player."
     class PLAYER description "Instance of a player."
-    class NAME description "Player's name."
     class BANK description "Player's amount of money."
     class CARDS description "Player's starting cards."
     class POKER_HAND description "The best out of five cards."
-    class CHANGE_GAME_STATE description "Changes state of the game with a valid move."
-    cluster ACTION description "Part tha takes care about all possible player's actions."
+    cluster PLAYER_ACTION description "Part tha takes care about all possible player's actions."
 end
 
-cluster_chart ACTION
+cluster_chart PLAYER_ACTION
     indexing
         in_cluster: "POKER_PLAYER";
     explanation
         "This cluster is fully responsible for every possible action of the player."
-    -- class charts in Actions.bon
+    -- class charts in Player_Action.bon
     class FOLD  description "Fold action."
     class STAY  description "Stay action."
     class RAISE  description "Raise action."
@@ -34,6 +32,7 @@ cluster_chart ACTION
 end
 
 cluster_chart POKER_TABLE
+    -- class charts in Poker_Table.bon
     explanation
         "Cluster that holds all the structures for the table"
     class TABLE description "Instance of a table."        
@@ -42,10 +41,12 @@ cluster_chart POKER_TABLE
     class MAX_NUMBER_OF_SEATS description "Size of the table."
     class ALL_SEATS description "List of all the seats of table."
     class HISTORY description "History of every hand played at this table."
-    cluster TABLE_ACTIONS description "Part that is responsible for all table actions from dealer aspect."
+    cluster TABLE_ACTION description "Part that is responsible for all table actions from dealer aspect."
 end
 
-cluster_chart TABLE_ACTIONS 
+cluster_chart TABLE_ACTION
+    indexing
+        in_cluster: "POKER_TABLE";
     -- class charts in Poker_Table.bon
     explanation
         "Representation of all the actions at the table."
@@ -64,14 +65,4 @@ cluster_chart UTILITIES
     class INPUT_HANDLING description "Facility for input handling."
     class PRINT_HANDLING description "Facility for printing."
     class LOG_HANDLING description "Facility for logging."
-end
-
-cluster POKER_PLAYER
-component
-    deferred class ALARM -- An alarm that is either on or off.
-    feature
-        deferred on  -- Turn this alarm on.
-        ensure
-            is_on();
-        end
 end

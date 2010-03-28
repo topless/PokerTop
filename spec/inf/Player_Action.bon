@@ -3,7 +3,7 @@
 -- they might get removed in a later stage. 
 class_chart CALL
 indexing
-    in_cluster: "ACTION";
+    in_cluster: "PLAYER_ACTION";
 explanation
     "Paying an existing bet in order to stay in the hand."
 command
@@ -15,7 +15,7 @@ end
 
 class_chart FOLD
 indexing
-  in_cluster: "ACTION";
+  in_cluster: "PLAYER_ACTION";
 explanation
     "Represents the action of fold, someone is no longer part of the hand."
 command
@@ -27,7 +27,7 @@ end
 
 class_chart STAY
 indexing
-    in_cluster: "ACTION";
+    in_cluster: "PLAYER_ACTION";
 explanation
     "Staying to current pot without betting or folding."
 command
@@ -38,7 +38,7 @@ end
 
 class_chart RAISE
 indexing
-    in_cluster: "ACTION";
+    in_cluster: "PLAYER_ACTION";
 explanation
     "Action of betting or raising the amount of previous bet."
 command
