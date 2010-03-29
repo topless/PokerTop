@@ -12,6 +12,30 @@ constraint
     "Size must be greater or equal than 2 and less or equal to 10"    
 end
 
+class_chart PLAYER
+indexing
+    in_cluster: "POKER_TABLE";
+explanation
+    "Defines a player."
+query
+    "Who am I?",
+    "How much money do I have?",
+    -- For the time being each seat will know who is sitting on it.
+    -- Player will have fields table and seat defining him respectively.
+    -- Probably in a later stage of development :( .
+    "Where am I sitting?",
+    -- A bit optimistic for design time - Aiming high!
+    "My statistics?"
+command
+    "Construct player.",
+    "Set Name.",
+    "Set bank amount.",
+    "Add value to bank amount",
+    "Subtract value from bank amount"
+constraint
+    "Values and bank amount must always be greater or equal to zero."    
+end
+
 class_chart DEALER
 indexing
     in_cluster: "POKER_TABLE";

@@ -10,38 +10,6 @@ end
 
 static_diagram POKER_SYSTEM
 component 
-    cluster POKER_PLAYER
-    component
-        class BANK
-        indexing
-            about: "Bank of each player."
-        feature{NONE}
-            amount: REAL -- Players amount of money
-            
-            make: BANK -- Create a new initialised bank object
-			ensure
-			    Result.amount = 0;
-			end
-
-			get_amount: REAL -- What's the current amount of money in bank.
-			    ensure
-			      Result = amount;
-			    end
-
-			set_amount  -- Set a new amount for bank.
-		        -> the_new_amount: REAL  -- Bank's new amount
-		        require
-		            the_new_amount /= Void;
-		            0 <= the_new_amount;
-		        ensure
-		            get_amount = the_new_amount;
-		        end
-		invariant
-            0 <= amount;    		              
-        end --class BANK
-        
-    end -- cluster POKER_PLAYER
-    
     cluster POKER_TABLE
     component
         class TABLE
@@ -64,7 +32,7 @@ component
                 ensure
                     Result.size = the_new_size;
                     get_size = the_new_size;
-                end --make_table
+                end --make table
             
             count_empty_seats: INTEGER
                 require
@@ -93,7 +61,7 @@ component
 	            ensure
 	                Result.position = new_position;
                     --Result.player.set_name = "empty" ;
-	            end -- make_seat                
+	            end -- make seat               
             
             get_position: INTEGER
                 ensure
@@ -117,6 +85,7 @@ component
                     get_player;
                     new_player /= Void;
                 ensure
+                    not is_availiable();
                     get_player = new_player
                 end
                                                         
@@ -125,12 +94,87 @@ component
         class PLAYER
         indexing
             about: "A poker player";
+        --Possible need to define scope {NONE}
         feature
             name: STRING  -- Player's name in order to distinguish them on the table.
             bank: BANK -- Player's bank    
+            
+            make: PLAYER
+                -> new_name: STRING
+                require
+                   new_name /= Void;
+                ensure
+                    Result.name = new_name;
+                    Result.bank.set_amount(0);
+                end -- make player
+            
+            get_name: STRING
+                ensure
+                    Result = name;
+                end --get_name
+            
+            get_bank_amount: REAL
+                require
+                    bank.get_amount >= 0;                    
+                ensure
+                    Result = bank.get_amount();
+                end -- get_bank_amount
+
+            add_to_bank
+                -> value_to_add: REAL
+                require
+                    value_to_add >= 0;
+                    get_bank_amount();
+                ensure
+                    get_bank_amount = old(get_bank_amount) + value_to_add;
+                end -- add to bank 
+            
+            subtract_from_bank
+                -> value_to_sub: REAL
+	            require
+	                value_to_sub >= 0;
+	                value_to_sub <= get_bank_amount();
+	            ensure
+	                get_bank_amount = old(get_bank_amount) - value_to_sub;
+	            end -- subtract
+	            
+        invariant
+            0 <= get_bank_amount();                               
         end -- class PLAYER
                 
     end -- cluster POKER_TABLE
+    
+    cluster POKER_PLAYER
+    component
+        class BANK
+        indexing
+            about: "Bank of each player."
+        feature{PLAYER}
+            amount: REAL -- Players amount of money
+            
+            make: BANK -- Create a new initialised bank object
+            ensure
+                Result.amount = 0;
+            end
+
+            get_amount: REAL -- What's the current amount of money in bank.
+                ensure
+                  Result = amount;
+                end
+
+            set_amount  -- Set a new amount for bank.
+                -> the_new_amount: REAL  -- Bank's new amount
+                require
+                    the_new_amount /= Void;
+                    0 <= the_new_amount;
+                ensure
+                    get_amount = the_new_amount;
+                end
+        invariant
+            0 <= amount;                          
+        end --class BANK
+        
+    end -- cluster POKER_PLAYER    
     
     cluster UTILITIES
     component
