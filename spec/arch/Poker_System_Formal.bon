@@ -1,3 +1,4 @@
+-- Used the system_chart in order to make it work without complaining about defining a system. 
 system_chart POKER_SYSTEM
     indexing
         author: "Chris";
@@ -20,9 +21,9 @@ component
             seats: SET[SEAT] -- A set of seats
             
             get_size: INTEGER 
-                ensure
-                    Result = size;
-                end -- get_size
+            ensure
+                Result = size;
+            end -- get_size
             
             make: TABLE -- Construct table  
                 -> the_new_size: INTEGER  -- Table size
@@ -35,16 +36,34 @@ component
                 end --make table
             
             count_empty_seats: INTEGER
-                require
-                    get_seats;
-                ensure
-                    Result /= Void;
-                end
+            require
+                get_seats;
+            ensure
+                Result /= Void;
+            end
                 
         invariant
             2 <= size ;
             10 >= size ;                
         end -- class TABLE
+        
+        class BUTTON
+        indexing
+            about: "The button that defines where the deal starts from."
+        feature
+            position: INTEGER -- Simply will point to the seat that holds the button.
+            
+            make: BUTTON
+            ensure
+                position = 0; -- Where the seats start
+            end -- Constructor
+            
+            next_player
+            ensure
+                position = old(position) + 1;                
+            end
+            
+        end -- class BUTTON
         
         class SEAT
         indexing
@@ -64,20 +83,20 @@ component
 	            end -- make seat               
             
             get_position: INTEGER
-                ensure
-                    Result = position;
-                end --get_position
+            ensure
+                Result = position;
+            end --get_position
             
             get_player: PLAYER
-                ensure
-                    Result = player;
-                end --get_player
+            ensure
+                Result = player;
+            end --get_player
             
             -- Check out how can add more functionality
             is_availiable: BOOLEAN
-                require
-                    get_player;
-                end
+            require
+                get_player;
+            end
             
             set_player
                 -> new_player: PLAYER
@@ -144,6 +163,128 @@ component
                 
     end -- cluster POKER_TABLE
     
+    cluster DEALER_ACTION
+    component
+        
+        class CARD
+        indexing
+            about: "A card of the deck"
+        feature
+            value: INTEGER
+            suit: INTEGER
+            
+            make: CARD
+                -> card_value: INTEGER
+                -> card_suit: INTEGER
+                require
+                    card_value /= Void;
+                    card_suit /= Void;
+                    1 <= card_value;
+                    13 >= card_value;
+                    1 <=  card_suit;
+                    4 >= card_suit;
+                ensure
+                    value = card_value;
+                    suit = card_suit;
+                end -- Constructor
+                
+        invariant
+			1 <= value;
+			13 >= value;
+			1 <= suit;
+			4 >= suit;
+        end -- class CARD        
+                
+        class BLIND
+        indexing
+            about: "Blind of the hand."
+        feature
+            -- Because SIZE matters :)
+            small: REAL -- Represents the small blind
+            big: REAL -- Represents the big blind
+            
+            make: BLIND
+                -> small_size: REAL
+                -> big_size: REAL
+                require
+                    small_size >= 0;
+                    big_size >= 0;
+                ensure
+                    small = small_size;
+                    big = big_size;
+                end -- Constructor
+
+            get_blind: BLIND
+            ensure
+               Result.small = small;
+               Result.big = big;
+            end
+            
+        invariant
+            0 <= small;
+            0 <= big;
+        end -- class BLIND
+        
+        class ANTE
+        indexing
+            about: "Ante of the hand."
+        feature
+            size: REAL -- Size of the ante.
+        
+	        make: ANTE -- Constructor of ante
+	            -> ante_size: REAL
+	        require
+	           ante_size >=0;
+	        ensure
+	           size = ante_size;
+	        end -- make ANTE
+	        
+	        get_ante_size: REAL
+	        ensure
+	           Result = size;
+	        end -- get_ante_size
+	        
+	        set_ante_size
+	           -> new_ante_value: REAL
+	           require
+	               new_ante_value >= 0;
+	           ensure
+	               get_ante_size = new_ante_value;
+	           end -- set_ante_size
+	    
+	    invariant
+	       0 <= size;    
+        end -- class ANTE
+        
+        class POT
+        indexing
+            about: "Pot of the table."
+        feature{DEALER}
+            size: REAL -- Size of the pot amount of money inside.
+            
+            make: POT -- Construct pot
+            ensure
+                size = 0;
+            end
+
+			get_pot_size: REAL
+			ensure
+                Result = size;
+			end --get_size
+			
+			add_to_pot_size
+			    -> added_value: REAL
+			    require
+                    added_value >= 0;
+                    get_pot_size;
+                ensure
+                    get_pot_size = old(get_pot_size) + added_value; 
+                end
+        invariant
+            0 <= size;
+        end -- class POT
+    end --cluster DEALER_ACTION     
+    
     cluster POKER_PLAYER
     component
         class BANK
@@ -154,13 +295,13 @@ component
             
             make: BANK -- Create a new initialised bank object
             ensure
-                Result.amount = 0;
+                amount = 0;
             end
 
             get_amount: REAL -- What's the current amount of money in bank.
-                ensure
-                  Result = amount;
-                end
+            ensure
+              Result = amount;
+            end
 
             set_amount  -- Set a new amount for bank.
                 -> the_new_amount: REAL  -- Bank's new amount
@@ -170,6 +311,7 @@ component
                 ensure
                     get_amount = the_new_amount;
                 end
+                
         invariant
             0 <= amount;                          
         end --class BANK
