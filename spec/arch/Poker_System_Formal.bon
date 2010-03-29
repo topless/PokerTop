@@ -14,33 +14,122 @@ component
     component
         class BANK
         indexing
-            about: "The bank of each player."
+            about: "Bank of each player."
         feature{NONE}
             amount: REAL -- Players amount of money
             
-            make_bank: BANK -- Create a new initialised bank object
+            make: BANK -- Create a new initialised bank object
 			ensure
-			    Result.amount >= 0;
-    		    --Result.amount = REAL;
+			    Result.amount = 0;
 			end
+
+			get_amount: REAL -- What's the current amount of money in bank.
+			    ensure
+			      Result = amount;
+			    end
+
+			set_amount  -- Set a new amount for bank.
+		        -> the_new_amount: REAL  -- Bank's new amount
+		        require
+		            the_new_amount /= Void;
+		            0 <= the_new_amount;
+		        ensure
+		            get_amount = the_new_amount;
+		        end
+		invariant
+            0 <= amount;    		              
         end --class BANK
-         
-        class PLAYER
-        indexing
-            about: "A poker player";
-        feature
-            name: VALUE  -- Player's name in order to distinguish them on the table.
-                
-        end -- class PLAYER
         
     end -- cluster POKER_PLAYER
     
     cluster POKER_TABLE
     component
         class TABLE
-            feature
-                size: INTEGER -- Size of the poker table.
-        end -- class TABLE        
+        indexing
+            about: "A poker table."
+        feature
+            size: INTEGER -- Size of the poker table.
+            seats: SET[SEAT] -- A set of seats
+            
+            get_size: INTEGER 
+                ensure
+                    Result = size;
+                end -- get_size
+            
+            make: TABLE -- Construct table  
+                -> the_new_size: INTEGER  -- Table size
+                require
+                    2 <= the_new_size;
+                    10 >= the_new_size;
+                ensure
+                    Result.size = the_new_size;
+                    get_size = the_new_size;
+                end --make_table
+            
+            count_empty_seats: INTEGER
+                require
+                    get_seats;
+                ensure
+                    Result /= Void;
+                end
+                
+        invariant
+            2 <= size ;
+            10 >= size ;                
+        end -- class TABLE
+        
+        class SEAT
+        indexing
+            about: "Representation of a seat at the table."
+        feature
+            position: INTEGER --Position of the seat at the table.
+            player: PLAYER -- Name of player sitting in this seat.
+            
+            -- I am kind of thinking having only constructor for SEAT 
+            make: SEAT
+                -> new_position: INTEGER
+	            require
+	               new_position /= Void;
+	            ensure
+	                Result.position = new_position;
+                    --Result.player.set_name = "empty" ;
+	            end -- make_seat                
+            
+            get_position: INTEGER
+                ensure
+                    Result = position;
+                end --get_position
+            
+            get_player: PLAYER
+                ensure
+                    Result = player;
+                end --get_player
+            
+            -- Check out how can add more functionality
+            is_availiable: BOOLEAN
+                require
+                    get_player;
+                end
+            
+            set_player
+                -> new_player: PLAYER
+                require
+                    get_player;
+                    new_player /= Void;
+                ensure
+                    get_player = new_player
+                end
+                                                        
+        end -- class SEAT
+        
+        class PLAYER
+        indexing
+            about: "A poker player";
+        feature
+            name: STRING  -- Player's name in order to distinguish them on the table.
+            bank: BANK -- Player's bank    
+        end -- class PLAYER
+                
     end -- cluster POKER_TABLE
     
     cluster UTILITIES

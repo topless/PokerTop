@@ -4,88 +4,17 @@ indexing
 explanation
     "Represents a table."
 query
-    "What is my size?",
+    "What is size of the table?",
     "How many players play?",
 command
-    "Create table."
-end
-
-class_chart HISTORY
-indexing
-    in_cluster: "POKER_TABLE";
-explanation
-    "Keeps history of every hand."
-query
-    "Is hand over?"
-command
-    "Store hand."
+    "Construct table."
 constraint
-    "Hand need to be over in order to be stored."
+    "Size must be greater or equal than 2 and less or equal to 10"    
 end
 
-class_chart ALL_SEATS
-indexing
-    in_cluster: "POKER_TABLE";
-explanation
-    "Structure that contains all the seats of the particular table and information \
-    \ about who player occupies each seat."
-query
-    "Is there seat availiable?",
-    "What is the size of this table?",
-    "Who is sitting where?"
-command
-    "Create list of seats."
-constraint
-    "Number of seats = MAX_NUMBER_OF_SEATS"
-end
-
-class_chart MAX_NUMBER_OF_SEATS
-indexing
-    in_cluster: "POKER_TABLE";
-explanation
-    "Each table has a specific predefined size."
-query
-    "Whats size of the table?"
-command
-    "Set size of table."
-constraint
-    "Constrained from size limitations 2 <= size <= 10"
-end
-
-class_chart SEAT
-indexing
-    in_cluster: "POKER_TABLE";
-explanation
-    "Each player have a specific seat in a table."
-query
-    "What is the seat position?",
-    "Who is sitting on that seat?",
-    "Is this seat occupied?"
-command
-    "Assign seat to player.",
-    "Set seat free."
-constraint
-    "Only one player can be the dealer per hand."
-end
-
-class_chart GAME_STATE
-indexing
-    in_cluster: "POKER_TABLE";
-explanation
-    "Tracks down status of the game."
-query
-    "Whats the status? (Including who's turn is it)"
-command
-    "Set last action.",
-    "Update game status."
-constraint
-    "Needs to be unique (Singleton)."
-end
-
--- Class charts for TABLE_ACTION
 class_chart DEALER
 indexing
-    in_cluster: "TABLE_ACTION";
+    in_cluster: "POKER_TABLE";
 explanation
     "Dealer is responsible for handling all the table actions."
 query
@@ -103,9 +32,54 @@ constraint
     "Only one dealer per table."
 end
 
+
+class_chart HISTORY
+indexing
+    in_cluster: "POKER_TABLE";
+explanation
+    "Keeps history of every hand."
+query
+    "Is hand over?"
+command
+    "Store hand."
+constraint
+    "Hand need to be over in order to be stored."
+end
+
+class_chart SEAT
+indexing
+    in_cluster: "POKER_TABLE";
+explanation
+    "Each player have a specific seat in a table."
+query
+    "What is the seat position?",
+    "Who is sitting on that seat?",
+    "Is this seat available?"
+command
+    "Construct seat.",
+    "Assign player to seat."
+constraint
+    "One player per seat."
+end
+
+class_chart GAME_STATE
+indexing
+    in_cluster: "POKER_TABLE";
+explanation
+    "Tracks down status of the game."
+query
+    "Whats the status? (Including who's turn is it)"
+command
+    "Set last action.",
+    "Update game status."
+constraint
+    "Needs to be unique (Singleton)."
+end
+
+-- Class charts for DEALER_ACTION
 class_chart BUTTON
 indexing
-    in_cluster: "TABLE_ACTION";
+    in_cluster: "DEALER_ACTION";
 explanation
     "A player will represent the dealer in each hand."
 query
@@ -118,7 +92,7 @@ end
 
 class_chart DECK
 indexing
-    in_cluster: "TABLE_ACTION";
+    in_cluster: "DEALER_ACTION";
 explanation
     "Represent the deck of 52 cards."
 query
@@ -136,7 +110,7 @@ end
 
 class_chart CARD
 indexing
-    in_cluster: "TABLE_ACTION";
+    in_cluster: "DEALER_ACTION";
 explanation
     "Represents on card."
 query
@@ -151,7 +125,7 @@ end
 
 class_chart POT
 indexing
-    in_cluster: "TABLE_ACTION";
+    in_cluster: "DEALER_ACTION";
 explanation
     "Represents the pot."
 query
@@ -164,7 +138,7 @@ end
 
 class_chart BLIND
 indexing
-    in_cluster: "TABLE_ACTION";
+    in_cluster: "DEALER_ACTION";
 explanation
     "Level of the blind."
 query
@@ -177,7 +151,7 @@ end
 
 class_chart ANTE
 indexing
-    in_cluster: "TABLE_ACTION";
+    in_cluster: "DEALER_ACTION";
 explanation
     "Value of ante."
 query

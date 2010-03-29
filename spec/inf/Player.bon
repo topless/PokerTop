@@ -1,6 +1,6 @@
 class_chart PLAYER
 indexing
-    in_cluster: "POKER_PLAYER";
+    in_cluster: "POKER_TABLE";
 explanation
     "Defines a player."
 query
