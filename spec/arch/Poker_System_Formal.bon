@@ -139,7 +139,7 @@ component
             name: STRING  -- Player's name in order to distinguish them on the table.
             bank: BANK -- Player's bank    
             is_active: BOOLEAN -- Defines if player is active(holding cards) in current hand
-            cards: LIST[CARD]
+            cards: LIST[CARD] -- Player's cards 0 or 2
             
             make: PLAYER
                 -> new_name: STRING
@@ -149,6 +149,41 @@ component
                     Result.name = new_name;
                     Result.bank.set_amount(0);
                 end -- make player
+
+            -- Although I defined actions as special classifiers in informal bon
+            -- reaching to this point my mind says to implement them as methods
+            -- for class player... I don't know what is the truth out there though...
+            
+            fold
+                require
+                    is_active;
+                ensure
+                    cards.count =0;
+                    not is_active;
+                end
+            
+            stay
+                require
+                    is_active;
+                ensure
+                    cards.count =2;
+                end
+                
+            call
+                require
+                    is_active;
+                ensure
+                    delta bank;
+                end                    
+
+            raise
+                -> raise_bet: REAL
+                require
+                    is_active;
+                    raise_bet >=0;
+                ensure
+                    delta bank;                    
+                end    
             
             get_name: STRING
                 ensure

@@ -29,19 +29,6 @@ cluster_chart POKER_PLAYER
     class BANK description "Player's amount of money."
     class CARDS description "Player's starting cards."
     class POKER_HAND description "The best out of five cards."
-    cluster PLAYER_ACTION description "Part tha takes care about all possible player's actions."
-end
-
-cluster_chart PLAYER_ACTION
-    indexing
-        in_cluster: "POKER_PLAYER";
-    explanation
-        "This cluster is fully responsible for every possible action of the player."
-    -- class charts in Player_Action.bon
-    class FOLD  description "Fold action."
-    class STAY  description "Stay action."
-    class RAISE  description "Raise action."
-    class CALL description "Calling a bet action."
 end
 
 cluster_chart DEALER_ACTION
