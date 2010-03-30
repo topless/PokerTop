@@ -20,6 +20,7 @@ explanation
 query
     "Who am I?",
     "How much money do I have?",
+    "Am I active in current hand?",
     -- For the time being each seat will know who is sitting on it.
     -- Player will have fields table and seat defining him respectively.
     -- Probably in a later stage of development :( .

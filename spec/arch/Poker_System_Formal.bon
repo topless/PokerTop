@@ -21,9 +21,9 @@ component
             seats: SET[SEAT] -- A set of seats
             
             get_size: INTEGER 
-            ensure
-                Result = size;
-            end -- get_size
+	            ensure
+	                Result = size;
+	            end -- get_size
             
             make: TABLE -- Construct table  
                 -> the_new_size: INTEGER  -- Table size
@@ -36,34 +36,18 @@ component
                 end --make table
             
             count_empty_seats: INTEGER
-            require
-                get_seats;
-            ensure
-                Result /= Void;
-            end
+	            require
+	                get_seats;
+	            ensure
+	                Result /= Void;
+	            end
                 
         invariant
+            seats.count >=2;
+            seats.count <=10;
             2 <= size ;
             10 >= size ;                
         end -- class TABLE
-        
-        class BUTTON
-        indexing
-            about: "The button that defines where the deal starts from."
-        feature
-            position: INTEGER -- Simply will point to the seat that holds the button.
-            
-            make: BUTTON
-            ensure
-                position = 0; -- Where the seats start
-            end -- Constructor
-            
-            next_player
-            ensure
-                position = old(position) + 1;                
-            end
-            
-        end -- class BUTTON
         
         class SEAT
         indexing
@@ -83,20 +67,20 @@ component
 	            end -- make seat               
             
             get_position: INTEGER
-            ensure
-                Result = position;
-            end --get_position
+	            ensure
+	                Result = position;
+	            end --get_position
             
             get_player: PLAYER
-            ensure
-                Result = player;
-            end --get_player
+	            ensure
+	                Result = player;
+	            end --get_player
             
             -- Check out how can add more functionality
             is_availiable: BOOLEAN
-            require
-                get_player;
-            end
+	            require
+	                get_player;
+	            end
             
             set_player
                 -> new_player: PLAYER
@@ -117,6 +101,7 @@ component
         feature
             name: STRING  -- Player's name in order to distinguish them on the table.
             bank: BANK -- Player's bank    
+            is_active: BOOLEAN -- Defines if player is active(holding cards) in current hand
             
             make: PLAYER
                 -> new_name: STRING
@@ -168,7 +153,7 @@ component
         
         class CARD
         indexing
-            about: "A card of the deck"
+            about: "A card of the deck."
         feature
             value: INTEGER
             suit: INTEGER
@@ -177,8 +162,6 @@ component
                 -> card_value: INTEGER
                 -> card_suit: INTEGER
                 require
-                    card_value /= Void;
-                    card_suit /= Void;
                     1 <= card_value;
                     13 >= card_value;
                     1 <=  card_suit;
@@ -194,15 +177,30 @@ component
 			1 <= suit;
 			4 >= suit;
         end -- class CARD        
-                
+
+        class DECK
+        indexing
+            abount: "Deck of all the cards"
+        feature
+            card_deck: SET[CARD] -- Set with all our cards for the game
+            
+            make: DECK
+	            ensure
+	                card_deck.count = 52;                
+	            end
+
+        invariant
+            card_deck.count <= 52;
+            card_deck.count >= 0;
+        end -- class DECK
+
         class BLIND
         indexing
             about: "Blind of the hand."
         feature
-            -- Because SIZE matters :)
             small: REAL -- Represents the small blind
             big: REAL -- Represents the big blind
-            
+
             make: BLIND
                 -> small_size: REAL
                 -> big_size: REAL
@@ -215,35 +213,35 @@ component
                 end -- Constructor
 
             get_blind: BLIND
-            ensure
-               Result.small = small;
-               Result.big = big;
-            end
-            
+	            ensure
+	               Result.small = small;
+	               Result.big = big;
+	            end
+
         invariant
             0 <= small;
             0 <= big;
         end -- class BLIND
-        
+
         class ANTE
         indexing
             about: "Ante of the hand."
         feature
             size: REAL -- Size of the ante.
-        
+
 	        make: ANTE -- Constructor of ante
 	            -> ante_size: REAL
-	        require
-	           ante_size >=0;
-	        ensure
-	           size = ante_size;
-	        end -- make ANTE
-	        
+		        require
+		           ante_size >= 0;
+		        ensure
+		           size = ante_size;
+		        end -- make ANTE
+
 	        get_ante_size: REAL
-	        ensure
-	           Result = size;
-	        end -- get_ante_size
-	        
+		        ensure
+		           Result = size;
+		        end -- get_ante_size
+
 	        set_ante_size
 	           -> new_ante_value: REAL
 	           require
@@ -251,26 +249,44 @@ component
 	           ensure
 	               get_ante_size = new_ante_value;
 	           end -- set_ante_size
-	    
+
 	    invariant
 	       0 <= size;    
         end -- class ANTE
+
+        class BUTTON
+        indexing
+            about: "The button that defines where the deal starts from."
+        feature
+            position: INTEGER -- Simply will point to the seat that holds the button.
+
+            make: BUTTON
+	            ensure
+	                position = 0; -- Where the seats start
+	            end -- Constructor
+
+            next_player
+	            ensure
+	                delta position;         
+	            end
         
+        end -- class BUTTON
+
         class POT
         indexing
             about: "Pot of the table."
-        feature{DEALER}
+        feature
             size: REAL -- Size of the pot amount of money inside.
             
             make: POT -- Construct pot
-            ensure
-                size = 0;
-            end
+	            ensure
+	                size = 0;
+	            end
 
 			get_pot_size: REAL
-			ensure
-                Result = size;
-			end --get_size
+				ensure
+	                Result = size;
+				end --get_size
 			
 			add_to_pot_size
 			    -> added_value: REAL
@@ -290,23 +306,23 @@ component
         class BANK
         indexing
             about: "Bank of each player."
-        feature{PLAYER}
+        feature
             amount: REAL -- Players amount of money
             
             make: BANK -- Create a new initialised bank object
-            ensure
-                amount = 0;
-            end
+	            ensure
+	                amount = 0;
+	            end
 
             get_amount: REAL -- What's the current amount of money in bank.
-            ensure
-              Result = amount;
-            end
+	            ensure
+	              Result = amount;
+	            end
 
             set_amount  -- Set a new amount for bank.
                 -> the_new_amount: REAL  -- Bank's new amount
                 require
-                    the_new_amount /= Void;
+                    the_new_amount >= 0;
                     0 <= the_new_amount;
                 ensure
                     get_amount = the_new_amount;
