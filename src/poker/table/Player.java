@@ -12,123 +12,133 @@ import poker.dealer.Card;
  */
 public/* @ nullable_by_default @ */class Player {
 
-    /** The is active. */
-    public boolean isActive;
+  /** The is active. */
+  public boolean isActive;
 
-    /** The bank. */
-    private double bank;
+  /** The bank. */
+  private double bank;
 
-    /** The cards. */
-    private List<Card> cards;
+  /** The cards. */
+  private List<Card> cards;
 
-    /** The name. */
-    private final String name;
+  /** The name. */
+  private final String name;
 
-    /**
-     * Instantiates a new player.
-     * 
-     * @param newName
-     *            the new name
-     */
-    // @ ensures name == newName;
-    public/* @ pure @ */Player(/* @ non_null @ */String newName, /* @ non_null @ */double initAmount) {
-        name = newName;
-        bank = initAmount;
-    }
+  /**
+   * Instantiates a new player.
+   * 
+   * @param newName
+   *          the new name
+   * @param initAmount
+   *          the init amount
+   */
+  // @ ensures name == newName;
+  public/* @ pure @ */Player(final/* @ non_null @ */String newName,
+      final/* @ non_null @ */double initAmount) {
+    this.name = newName;
+    this.bank = initAmount;
+  }
 
-    // @ requires bank >= 0;
-    // @ ensures \result == bank ;
-    /**
-     * Gets the bank amount.
-     * 
-     * @return the bank amount
-     */
-    private/* @ pure @ */double getBank() {
-        return this.bank;
-    }
+  // @ requires bank >= 0;
+  // @ ensures \result == bank ;
+  /**
+   * Gets the bank amount.
+   * 
+   * @return the bank amount
+   */
+  private/* @ pure @ */double getBank() {
+    return this.bank;
+  }
 
-    // @ ensures \result == name;
-    /**
-     * Gets the name.
-     * 
-     * @return the name
-     */
-    public/* @ pure @ */String getName() {
-        return this.name;
-    }
+  // @ ensures \result == name;
+  /**
+   * Gets the name.
+   * 
+   * @return the name
+   */
+  public/* @ pure @ */String getName() {
+    return this.name;
+  }
 
-    // @ requires value >= 0;
-    // @ assignable bank;
-    // @ ensures bank == \old(get_bank_amount) + value;
-    /**
-     * Adds the to bank.
-     * 
-     * @param value_to_add
-     *            the value_to_add
-     */
-    public final void addToBank(double value) {
-        setBank(getBank() + value);
-    }
+  // @ requires value >= 0;
+  // @ assignable bank;
+  // @ ensures bank == \old(get_bank_amount) + value;
+  /**
+   * Adds the to bank.
+   * 
+   * @param value
+   *          the value
+   */
+  public final void addToBank(double value) {
+    setBank(getBank() + value);
+  }
 
-    // @ assignable bank;
-    // @ requires is_active;
-    /**
-     * Call.
-     */
-    public void call() {
-    }
+  // @ assignable bank;
+  // @ requires is_active;
+  /**
+   * Call.
+   */
+  public void call() {
+  }
 
-    // @ requires is_active; ensures cards . count == 0; ensures ! is_active;
-    /**
-     * Fold.
-     */
-    public void fold() {
-    }
+  // @ requires is_active; ensures cards . count == 0; ensures ! is_active;
+  /**
+   * Fold.
+   */
+  public void fold() {
+  }
 
-    // @ assignable bank; requires is_active; requires raise_bet >= 0;
+  // @ assignable bank; requires is_active; requires raise_bet >= 0;
 
-    /**
-     * Raise.
-     * 
-     * @param raiseBet
-     *            the raise bet
-     */
-    public void raise(double raiseBet) {
-    }
+  /**
+   * Raise.
+   * 
+   * @param raiseBet
+   *          the raise bet value
+   */
+  public void raise(double raiseBet) {
 
-    // @ requires cards . count >= 0;
-    /**
-     * Show cards.
-     */
-    public void showCards() {
-    }
+  }
 
-    // @ requires is_active;
-    // @ ensures cards . count == 2;
-    /**
-     * Stay.
-     */
-    public void stay() {
-    }
+  // @ requires cards . count >= 0;
+  /**
+   * Show cards.
+   */
+  public void showCards() {
+  }
 
-    // @ requires value >= 0;
-    // @ requires value <= bank;
-    // @ ensures bank == \old(bank) - value;
-    /**
-     * Subtract from bank.
-     * 
-     * @param value
-     *            the value we subtract from bank.
-     */
-    public final void subtractFromBank(final double value) {
-        setBank(getBank() - value);
-    }
+  // @ requires is_active;
+  // @ ensures cards . count == 2;
+  /**
+   * Stay.
+   */
+  public void stay() {
+  }
 
-    public final void setBank(double bank) {
-        this.bank = bank;
-    }
+  // @ requires value >= 0;
+  // @ requires value <= bank;
+  // @ ensures bank == \old(bank) - value;
+  /**
+   * Subtract from bank.
+   * 
+   * @param value
+   *          the value we subtract from bank.
+   */
+  public final void subtractFromBank(final double value) {
+    setBank(getBank() - value);
+  }
 
-    // @ invariant cards . count >= 0;
-    // @ invariant cards . count <= 2;
-    // @ invariant 0 <= get_bank_amount;
+  /**
+   * Sets the bank.
+   * 
+   * @param bank
+   *          the new bank
+   */
+  public final void setBank(final double bank) {
+    this.bank = bank;
+  }
+
+  // @ invariant cards . count >= 0;
+  // @ invariant cards . count <= 2;
+  // @ invariant 0 <= get_bank_amount;
 }

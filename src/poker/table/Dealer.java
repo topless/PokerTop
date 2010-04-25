@@ -1,15 +1,13 @@
 /*
- *
+ * Dealer.java
  */
 package poker.table;
 
-import poker.dealer.Ante;
 import poker.dealer.Blind;
 import poker.dealer.Button;
 import poker.dealer.Deck;
 import poker.dealer.Pot;
 
-// TODO: Auto-generated Javadoc
 //import java.util.Set;
 
 /**
@@ -17,44 +15,111 @@ import poker.dealer.Pot;
  */
 public/* @ nullable_by_default @ */class Dealer {
 
-    // @ requires small_blind >= 0;
-    // @ requires big_blind >= 0;
-    // @ requires ante_size >= 0;
-    // @ ensures pot == 0;
-    // @ ensures blind . get_small_blind == small_blind;
-    // @ ensures blind . get_big_blind == big_blind;
-    // @ ensures ante . get_ante == ante_size;
-    /**
-     * Instantiates a new dealer.
-     * 
-     * @param big_blind
-     *            the big_blind
-     * @param small_blind
-     *            the small_blind
-     * @param ante_size
-     *            the ante_size
-     */
-    public/* @ pure @ */Dealer(double big_blind, double small_blind, double ante_size) {
-    }
+  /** The small blind. */
+  private double smallBlind;
 
-    /** The ante. */
-    public Ante ante;
+  /** The big blind. */
+  private double bigBlind;
 
-    /** The blind. */
-    public Blind blind;
+  /** The ante. */
+  private double ante;
 
-    /** The button. */
-    public Button button;
+  /**
+   * Gets the ante.
+   * 
+   * @return the ante
+   */
+  public final double getAnte() {
+    return ante;
+  }
 
-    /** The deck. */
-    public Deck deck;
-    // Define enum values of game state.
-    // public Set<Values> game_state;
-    /** The pot. */
-    public Pot pot;
+  /**
+   * Sets the ante.
+   * 
+   * @param newAnte
+   *          the new ante
+   */
+  public final void setAnte(final double newAnte) {
+    this.ante = newAnte;
+  }
 
-    // @ invariant pot >= 0;
-    // @ invariant blind . get_small_blind >= 0;
-    // @ invariant blind . get_big_blind >= 0;
-    // @ invariant ante . get_ante >= 0;
+  // @ requires smallBlind >= 0;
+  // @ requires bigBlind >= 0;
+  // @ requires ante_size >= 0;
+  // @ ensures pot == 0;
+  // @ ensures getSmallBlind== smallBlind;
+  // @ ensures getBigBlind == bigBlind;
+  // @ ensures getAnte == ante;
+  /**
+   * Instantiates a new dealer.
+   * 
+   * @param bigBlind
+   *          the big blind
+   * @param smallBlind
+   *          the small blind
+   * @param anteSize
+   *          the antesize
+   */
+  public/* @ pure @ */Dealer(double bigBlind, double smallBlind,
+      final double anteSize) {
+    this.smallBlind = smallBlind;
+    this.bigBlind = bigBlind;
+    this.ante = anteSize;
+  }
+
+  /**
+   * Gets the small blind.
+   * 
+   * @return the small blind
+   */
+  public final double getSmallBlind() {
+    return smallBlind;
+  }
+
+  /**
+   * Sets the small blind.
+   * 
+   * @param smallBlind
+   *          the new small blind
+   */
+  public final void setSmallBlind(double smallBlind) {
+    this.smallBlind = smallBlind;
+  }
+
+  /**
+   * Gets the big blind.
+   * 
+   * @return the big blind
+   */
+  public final double getBigBlind() {
+    return bigBlind;
+  }
+
+  /**
+   * Sets the big blind.
+   * 
+   * @param bigBlind
+   *          the new big blind
+   */
+  public final void setBigBlind(double bigBlind) {
+    this.bigBlind = bigBlind;
+  }
+
+  /** The blind. */
+  public Blind blind;
+
+  /** The button. */
+  public Button button;
+
+  /** The deck. */
+  public Deck deck;
+  // Define enum values of game state.
+  // public Set<Values> game_state;
+  /** The pot. */
+  public Pot pot;
+
+  // @ invariant pot >= 0;
+  // @ invariant blind . get_small_blind >= 0;
+  // @ invariant blind . get_big_blind >= 0;
+  // @ invariant ante . get_ante >= 0;
 }

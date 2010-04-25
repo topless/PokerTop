@@ -3,6 +3,7 @@
 	<name>PokerTop</name>
 	<comment></comment>
 	<projects>
+		<project>jmlspecs</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
@@ -31,7 +32,22 @@
 			</arguments>
 		</buildCommand>
 		<buildCommand>
+			<name>net.sf.eclipsecs.core.CheckstyleBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>mobius.escjava2.plugin.autocheckEscjavaBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
 			<name>com.atlassw.tools.eclipse.checkstyle.CheckstyleBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>ie.ucd.bon.beetlz.plugin.beetlzbuilder</name>
 			<arguments>
 			</arguments>
 		</buildCommand>
@@ -43,6 +59,9 @@
 		<nature>net.sourceforge.pmd.eclipse.plugin.pmdNature</nature>
 		<nature>edu.umd.cs.findbugs.plugin.eclipse.findbugsNature</nature>
 		<nature>ch.ethz.inf.pm.jml.plugin.CheckerNature</nature>
+		<nature>net.sf.eclipsecs.core.CheckstyleNature</nature>
+		<nature>mobius.escjava2.plugin.autocheckEscjavaNature</nature>
 		<nature>com.atlassw.tools.eclipse.checkstyle.CheckstyleNature</nature>
+		<nature>ie.ucd.bon.beetlz.plugin.beetlznature</nature>
 	</natures>
 </projectDescription>
