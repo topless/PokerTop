@@ -7,8 +7,6 @@ package poker.dealer;
  * The button that defines where the deal starts from.
  */
 public/* nullable_by_default */class Button {
-  /** The position. */
-  private /*@ spec_public @*/int position;
 
   /**
    * Instantiates a new button.
@@ -18,25 +16,24 @@ public/* nullable_by_default */class Button {
     this.position = 0;
   }
 
-  //@ ensures \result == position;
+  /** The position. */
+  private /*@ spec_public @*/int position;
+
   /**
-   * Gets the position.
-   *
    * @return the position
    */
+  //@ ensures \result == position;
   public final int getPosition() {
     return position;
   }
-  
+
+  /**
+   * @param newPosition the new position
+   */
   //@ requires newPosition >=0;
   //@ assignable position;
   //@ ensures position == newPosition;
-  /**
-   * Sets the position.
-   *
-   * @param newPosition the new position
-   */
-  public final void setPosition(final int newPosition) {
+  public final void nextDealer(final int newPosition) {
     this.position = newPosition;
   }
 }

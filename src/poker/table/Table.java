@@ -22,10 +22,10 @@ public/* nullable_by_default */class Table {
   /**
    * Constant max table size.
    */
-  private static final int TABLE_SIZE = 10;
+  public static final int TABLE_SIZE = 10;
 
   /** The seats. */
   /*@ spec_public @*/ List seats = new ArrayList();
-  
+
   //@ public invariant seats.size() >= 2 && seats.size() <= 10;
 }

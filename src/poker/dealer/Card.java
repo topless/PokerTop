@@ -75,27 +75,27 @@ public/* nullable_by_default */class Card {
   // invariant 14 >= rank;
   // invariant 0 <= suit;
   // invariant 3 >= suit;
+  static class Suit {
+    static final int CLUBS = 0;
+    static final int DIAMONDS = 1;
+    static final int HEARTS = 2;
+    static final int SPADES = 3;
+  }
+
+  static class Rank {
+    static final int DEUCE = 2;
+    static final int THREE = 3;
+    static final int FOUR = 4;
+    static final int FIVE = 5;
+    static final int SIX = 6;
+    static final int SEVEN = 7;
+    static final int EIGHT = 8;
+    static final int NINE = 9;
+    static final int TEN = 10;
+    static final int JACK = 11;
+    static final int QUEEN = 12;
+    static final int KING = 13;
+    static final int ACE = 14;
+  }
 }
 
-class Suit {
-  static final int CLUBS = 0;
-  static final int DIAMONDS = 1;
-  static final int HEARTS = 2;
-  static final int SPADES = 3;
-}
-
-class Rank {
-  static final int DEUCE = 2;
-  static final int THREE = 3;
-  static final int FOUR = 4;
-  static final int FIVE = 5;
-  static final int SIX = 6;
-  static final int SEVEN = 7;
-  static final int EIGHT = 8;
-  static final int NINE = 9;
-  static final int TEN = 10;
-  static final int JACK = 11;
-  static final int QUEEN = 12;
-  static final int KING = 13;
-  static final int ACE = 14;
-}

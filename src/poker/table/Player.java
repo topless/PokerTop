@@ -3,9 +3,7 @@
  */
 package poker.table;
 
-import java.util.List;
-
-import poker.dealer.Card;
+import java.util.LinkedList;
 
 /**
  * A poker player.
@@ -35,7 +33,7 @@ public/* nullable_by_default */class Player {
   private /*@ spec_public @*/ double bank;
 
   /** The cards. */
-  private /*@ spec_public @*/ List<Card> cards;
+  private /*@ spec_public @*/ LinkedList cards;
 
   /** The name. */
   private /*@ spec_public @*/ String name;
@@ -84,7 +82,7 @@ public/* nullable_by_default */class Player {
    * Fold.
    */
   //@ requires isActive();
-  //@ ensures cards . count == 0;
+  //@ ensures cards.size() == 0;
   //@ ensures ! isActive();
   public void fold() {
   }
@@ -104,7 +102,7 @@ public/* nullable_by_default */class Player {
   /**
    * Show cards.
    */
-  //@ requires cards.count >= 0;
+  //@ requires cards.size() >= 0;
   //@ requires isActive();
   public void showCards() {
   }
@@ -113,7 +111,7 @@ public/* nullable_by_default */class Player {
    * Stay.
    */
   //@ requires isActive();
-  //@ ensures cards.count == 2;
+  //@ ensures cards.size() == 2;
   public void stay() {
   }
 
@@ -134,6 +132,8 @@ public/* nullable_by_default */class Player {
    * @param newBank
    *          the new bank amount.
    */
+  //@ requires newBank >= 0;
+  //@ assignable bank;
   public final void setBank(final double newBank) {
     this.bank = newBank;
   }
@@ -152,7 +152,7 @@ public/* nullable_by_default */class Player {
   /**
    * @return status of player
    */
-  public final boolean isActive() {
+  public /*@ pure @*/ final boolean isActive() {
     return active;
   }
 
@@ -160,7 +160,7 @@ public/* nullable_by_default */class Player {
   /**
    * @param newCards Player's new cards.
    */
-  public final void setCards(final List<Card> newCards) {
+  public final void setCards(final LinkedList newCards) {
     this.cards = newCards;
   }
 
@@ -168,10 +168,10 @@ public/* nullable_by_default */class Player {
   /**
    * @return Player's cards.
    */
-  public final List<Card> getCards() {
+  public final LinkedList getCards() {
     return cards;
   }
 
-  //@ invariant cards.count >= 0 && cards.count <= 2;
+  //@ invariant cards.size() >= 0 && cards.size() <= 2;
   //@ invariant 0 <= bank;
 }

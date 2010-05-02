@@ -18,10 +18,11 @@ public/* nullable_by_default */class Blind {
    *          the size of ante.
    */
   //@ public normal_behavior
-  //@ requires smallBlind >= 0 && bigBlind >= 0;
-  //@ assignable small, big;
+  //@ requires smallBlind >= 0 && bigBlind >= 0 && ante >=0;
+  //@ assignable small, big, ante;
   //@ ensures small == smallBlind;
   //@ ensures big == bigBlind;
+  //@ ensures ante == anteSize;
   public/*@ pure @*/Blind(final double smallBlind, final double bigBlind, final double anteSize) {
     this.small = smallBlind;
     this.big = bigBlind;

@@ -3,21 +3,30 @@
  */
 package poker.dealer;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.LinkedList;
 /**
  * Deck of all the cards.
  */
 public/* nullable_by_default */class Deck {
 
+
   /** All the cards of the deck. */
-  /*@ spec_public @*/ List allCards;
+  /*@ spec_public @*/ private LinkedList allCards;
 
   /**
-   * @return number of cards of the deck.
+   * Number of cards of a full deck.
    */
-  public final int count() {
-    return getAllCards().size();
+  public static final int FULL_DECK = 52;
+
+  /**
+   * Shuffle deck.
+   */
+  //@ requires allCards.size() == FULL_DECK;
+  //@ assignable allCards;
+  //@ ensures allCards.size() == FULL_DECK;
+  public final void shuffleDeck() {
+    //Collections.shuffle(allCards);
+
   }
 
   /**
@@ -25,16 +34,23 @@ public/* nullable_by_default */class Deck {
    */
   //@ ensures allCards.size() == \old(allCards.size()) - 3;
   public void dealFlop() {
-
   }
-
 
   /**
    * Deal players.
+   * @param numOfPlayers number of players to be dealt cards.
    */
-  //@ requires allCards.size() == 52;
+  //@ requires numOfPlayers >= 2;
+  //@ requires allCards.size() == FULL_DECK;
   //@ assignable allCards;
-  public void dealPlayers() {
+  public void dealPlayers(final int numOfPlayers) {
+  }
+
+  /**
+   * Deal turn.
+   */
+  //@ ensures allCards.size() == \old(allCards.size()) - 1;
+  public void dealTurn() {
   }
 
   /**
@@ -44,30 +60,11 @@ public/* nullable_by_default */class Deck {
   public void dealRiver() {
   }
 
-
-  /**
-   * Deal turn.
-   */
-  //@ ensures allCards.size() == \old(allCards.size()) - 1;
-  public void dealTurn() {
-  }
-
-
-  /**
-   * Shuffle deck.
-   */
-  //@ requires allCards.size() == 52;
-  //@ assignable allCards;
-  //@ ensures allCards.size() == 52;
-  public final void shuffleDeck() {
-    Collections.shuffle(allCards);
-  }
-
   /**
    * @return all cards of the deck
    */
   //@ ensures \result == allCards;
-  public final List getAllCards() {
+  public final LinkedList getAllCards() {
     return allCards;
   }
 
@@ -76,10 +73,9 @@ public/* nullable_by_default */class Deck {
    */
   //@ requires newDeckOfCards != null;
   //@ ensures allCards == newDeckOfCards;
-  public final void setAllCards(final List newDeckOfCards) {
+  public final void setAllCards(final LinkedList newDeckOfCards) {
     this.allCards = newDeckOfCards;
   }
 
-  //@ invariant allCards.size() <= 52;
-  //@ invariant allCards.size() >= 0;
+  //@ invariant allCards.size() <= FULL_DECK && allCards.size() >= 0;
 }

@@ -17,7 +17,6 @@ import poker.dealer.Pot;
   /**
    * Instantiates a new dealer.
    */
-  //@ ensures pot == 0;
   public/*@ pure @*/Dealer() {
     /*this.blind = new Blind(0, 0, 0);
     this.button = new Button();
@@ -37,5 +36,4 @@ import poker.dealer.Pot;
   /** The pot. */
   /*@ spec_public @*/ private  Pot pot;
 
-  //@ invariant pot >= 0;
 }
