@@ -324,6 +324,12 @@ component
                     big = big_size;
                 end -- Constructor
 
+            get_blind: BLIND
+	            ensure
+	               Result.small = small;
+	               Result.big = big;
+	            end
+            
             get_small_blind: REAL
                 ensure
                    Result.small = small;

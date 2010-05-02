@@ -3,64 +3,83 @@
  */
 package poker.dealer;
 
-import java.util.Set;
-
-// TODO: Auto-generated Javadoc
+import java.util.Collections;
+import java.util.List;
 /**
  * Deck of all the cards.
  */
-public/* @ nullable_by_default @ */class Deck {
+public/* nullable_by_default */class Deck {
 
-  // @ ensures deck . count == 52;
+  /** All the cards of the deck. */
+  /*@ spec_public @*/ List allCards;
+
   /**
-   * Instantiates a new deck.
+   * @return number of cards of the deck.
    */
-  public/* @ pure @ */Deck() {
+  public final int count() {
+    return getAllCards().size();
   }
 
-  /** The cards deck. */
-  public Set<Card> cardsDeck;
-
-  // @ ensures deck == deck;
-  // public /*@ pure @*/ Deck get_deck(){
-  // }
-
-  // @ ensures deck . count == \old(deck . count) - 3;
   /**
    * Deal flop.
    */
+  //@ ensures allCards.size() == \old(allCards.size()) - 3;
   public void dealFlop() {
+
   }
 
-  // @ assignable deck;
-  // @ requires deck . count == 52;
+
   /**
    * Deal players.
    */
+  //@ requires allCards.size() == 52;
+  //@ assignable allCards;
   public void dealPlayers() {
   }
 
-  // @ ensures deck . count == \old(deck . count) - 1;
   /**
    * Deal river.
    */
+  //@ ensures allCards.size() == \old(allCards.size()) - 1;
   public void dealRiver() {
   }
 
-  // @ ensures deck . count == \old(deck . count) - 1;
+
   /**
    * Deal turn.
    */
+  //@ ensures allCards.size() == \old(allCards.size()) - 1;
   public void dealTurn() {
   }
 
-  // @ requires deck . count == 52;
+
   /**
    * Shuffle deck.
    */
-  public void shuffleDeck() {
+  //@ requires allCards.size() == 52;
+  //@ assignable allCards;
+  //@ ensures allCards.size() == 52;
+  public final void shuffleDeck() {
+    Collections.shuffle(allCards);
   }
 
-  // @ invariant deck . count <= 52;
-  // @ invariant deck . count >= 0;
+  /**
+   * @return all cards of the deck
+   */
+  //@ ensures \result == allCards;
+  public final List getAllCards() {
+    return allCards;
+  }
+
+  /**
+   * @param newDeckOfCards Then new deck of cards.
+   */
+  //@ requires newDeckOfCards != null;
+  //@ ensures allCards == newDeckOfCards;
+  public final void setAllCards(final List newDeckOfCards) {
+    this.allCards = newDeckOfCards;
+  }
+
+  //@ invariant allCards.size() <= 52;
+  //@ invariant allCards.size() >= 0;
 }

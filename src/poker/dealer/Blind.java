@@ -1,53 +1,99 @@
+/*
+ * 
+ */
 package poker.dealer;
 
 /**
  * Blind of the hand.
  */
-public/*@ nullable_by_default @*/class Blind {
+public/* nullable_by_default */class Blind {
 
-  //@ requires smallBlind >= 0;
-  //@ requires bigBlind >= 0;
-  //@ ensures small == smallBlind;
-  //@ ensures big == bigBlind;
   /**
-   * Instantiates a new blind.
-   * 
+   * Creates a new blind.
    * @param smallBlind
    *          the size of the small blind.
    * @param bigBlind
    *          the size of the big blind.
+   * @param anteSize
+   *          the size of ante.
    */
-  public/*@ pure @*/Blind(final double smallBlind, final double bigBlind) {
+  //@ public normal_behavior
+  //@ requires smallBlind >= 0 && bigBlind >= 0;
+  //@ assignable small, big;
+  //@ ensures small == smallBlind;
+  //@ ensures big == bigBlind;
+  public/*@ pure @*/Blind(final double smallBlind, final double bigBlind, final double anteSize) {
     this.small = smallBlind;
     this.big = bigBlind;
+    this.ante = anteSize;
   }
 
   /** The big. */
-  public double big;
+  private /*@ spec_public @*/ double big;
 
   /** The small. */
-  public double small;
+  private /*@ spec_public @*/ double small;
 
-  // @ ensures big == big;
+  /** The ante. */
+  private /*@ spec_public @*/ double ante;
+
   /**
-   * Gets the big blind.
-   * 
+   * @return the ante
+   */
+  //@ ensures 0 <= \result;
+  //@ ensures ante == \result;
+  public final double getAnte() {
+    return ante;
+  }
+
+  /**
+   * @param newAnte
+   *          the new ante
+   */
+  //@ requires newAnte >= 0;
+  //@ assignable ante;
+  //@ ensures ante == newAnte;
+  public final void setAnte(final double newAnte) {
+    this.ante = newAnte;
+  }
+
+  /**
    * @return the big blind
    */
-  public/*@ pure @*/double getBigBlind() {
-    return 2.0;
+  //@ ensures 0 <= \result;
+  //@ ensures big == \result;
+  public final double getBig() {
+    return big;
   }
 
-  //@ ensures small == small;
   /**
-   * Gets the small blind.
-   * 
-   * @return the small blind
+   * @param newBig the new value of big blind.
    */
-  public/*@ pure @*/double getSmallBlind() {
-    return 1.0;
+  //@ requires newBig >= 0;
+  //@ assignable big;
+  //@ ensures big == newBig;
+  public final void setBig(final double newBig) {
+    this.big = newBig;
   }
 
-  //@ invariant 0 <= small;
-  //@ invariant 0 <= big;
+  /**
+   * @return the small
+   */
+  //@  ensures 0 <= \result;
+  //@  ensures small == \result;
+  public final double getSmall() {
+    return small;
+  }
+
+  /**
+   * @param newSmall the new small blind value
+   */
+  //@ requires newSmall >= 0;
+  //@ assignable small;
+  //@ ensures small == newSmall;
+  public final void setSmall(final double newSmall) {
+    this.small = newSmall;
+  }
+
+  //@ invariant 0 <= small && 0 <= big && ante >= 0;
 }

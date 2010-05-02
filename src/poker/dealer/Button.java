@@ -6,24 +6,37 @@ package poker.dealer;
 /**
  * The button that defines where the deal starts from.
  */
-public/* @ nullable_by_default @ */class Button {
+public/* nullable_by_default */class Button {
   /** The position. */
-  private int position;
+  private /*@ spec_public @*/int position;
 
   /**
    * Instantiates a new button.
    */
-  // @ ensures position == 0;
+  //@ ensures position == 0;
   public/* @ pure @ */Button() {
-    // const comment
-    position = 0;
+    this.position = 0;
   }
 
-  // @ assignable position;
+  //@ ensures \result == position;
   /**
-   * Next player.
+   * Gets the position.
+   *
+   * @return the position
    */
-  public final void nextPlayer() {
-    position++;
+  public final int getPosition() {
+    return position;
+  }
+  
+  //@ requires newPosition >=0;
+  //@ assignable position;
+  //@ ensures position == newPosition;
+  /**
+   * Sets the position.
+   *
+   * @param newPosition the new position
+   */
+  public final void setPosition(final int newPosition) {
+    this.position = newPosition;
   }
 }

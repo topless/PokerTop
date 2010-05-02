@@ -6,56 +6,27 @@ package poker.table;
 /**
  * Representation of a seat at the table.
  */
-public/* @ nullable_by_default @ */class Seat {
+public/* nullable_by_default */class Seat {
+  /** The position. */
+  private /*@ spec_public @*/ final int position;
 
-  // @ ensures position == new_position;
   /**
    * Instantiates a new seat.
-   * 
-   * @param new_position
-   *          the new_position
+   * @param newPosition
+   *          the new position
    */
-  public/* @ pure @ */Seat(/* @ non_null @ */int new_position) {
+  //@ ensures position == newPosition;
+  public/*@ pure @*/Seat(final int newPosition) {
+    this.position = newPosition;
   }
 
-  /** The player. */
-  public Player player;
-
-  /** The position. */
-  public int position;
-
-  // @ ensures \result == player;
-  // public /*@ pure @*/ Player get_player(){}
-
-  // @ ensures \result == position;
   /**
-   * Gets the position.
-   * 
    * @return the position
    */
-  public/* @ pure @ */int getPosition() {
-    return 0;
+  //@ ensures \result == position;
+  public final /*@ pure @*/ int getPosition() {
+    return position;
   }
 
-  // @ requires get_player;
-  /**
-   * Checks if is availiable.
-   * 
-   * @return true, if is availiable
-   */
-  public final/* @ pure @ */boolean isAvailiable() {
-    return false;
-  }
-
-  // @ requires get_player;
-  // @ ensures ! is_availiable;
-  // @ ensures get_player == new_player;
-  /**
-   * Sets the player.
-   * 
-   * @param new_player
-   *          the new player
-   */
-  public void setPlayer(/* @ non_null @ */Player new_player) {
-  }
+  //@ invariant position >=0;
 }

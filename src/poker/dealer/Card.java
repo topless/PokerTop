@@ -3,36 +3,99 @@
  */
 package poker.dealer;
 
+
 /**
  * A card of the deck.
  */
-public/* @ nullable_by_default @ */class Card {
 
-  // @ requires 1 <= card_value;
-  // @ requires 13 >= card_value;
-  // @ requires 1 <= card_suit;
-  // @ requires 4 >= card_suit;
-  // @ ensures value == card_value;
-  // @ ensures suit == card_suit;
+public/* nullable_by_default */class Card {
+
   /**
    * Instantiates a new card.
-   * 
-   * @param card_value
-   *          the card_value
-   * @param card_suit
-   *          the card_suit
+   * @param cardRank
+   *          Rank of the card.
+   * @param cardSuit
+   *          Suit of the card.
    */
-  public/* @ pure @ */Card(int card_value, int card_suit) {
+   //@ public normal_behavior
+   //@ requires 2 <= cardRank;
+   //@ requires 14 >= cardRank;
+   //@ requires 0 <= cardSuit;
+   //@ requires 3 >= cardSuit;
+   //@ ensures rank == cardRank;
+   //@ ensures suit == cardSuit;
+  public/*@ pure @*/Card(final int cardRank, final int cardSuit) {
+    this.rank = cardRank;
+    this.suit = cardSuit;
   }
 
   /** The suit. */
-  public int suit;
+  private /*@ spec_public @*/ int suit;
 
   /** The value. */
-  public int value;
+  private /*@ spec_public @*/ int rank;
 
-  // @ invariant 1 <= value;
-  // @ invariant 13 >= value;
-  // @ invariant 1 <= suit;
-  // @ invariant 4 >= suit;
+  /**
+   * @param newRank the new value
+   */
+  //@ requires newRank >=2 && newRank <= 14;
+  //@ assignable rank;
+  //@ ensures rank == newRank;
+  public final void setRank(final int newRank) {
+    this.rank = newRank;
+  }
+
+  /**
+   * @return the rank of card
+   */
+  //@ ensures \result == rank;
+  public final int getRank() {
+    return this.rank;
+  }
+
+  /**
+   * @param newSuit the new suit
+   */
+  //@ requires newSuit >=0 && newSuit <= 3;
+  //@ assignable suit;
+  //@ ensures suit == newSuit;
+  public final void setSuit(final int newSuit) {
+    suit = newSuit;
+  }
+
+  /**
+   * @return the suit
+   */
+  //@ ensures \result == suit;
+  public final int getSuit() {
+    return suit;
+  }
+
+  // invariant 1 <= rank;
+  // invariant 14 >= rank;
+  // invariant 0 <= suit;
+  // invariant 3 >= suit;
+}
+
+class Suit {
+  static final int CLUBS = 0;
+  static final int DIAMONDS = 1;
+  static final int HEARTS = 2;
+  static final int SPADES = 3;
+}
+
+class Rank {
+  static final int DEUCE = 2;
+  static final int THREE = 3;
+  static final int FOUR = 4;
+  static final int FIVE = 5;
+  static final int SIX = 6;
+  static final int SEVEN = 7;
+  static final int EIGHT = 8;
+  static final int NINE = 9;
+  static final int TEN = 10;
+  static final int JACK = 11;
+  static final int QUEEN = 12;
+  static final int KING = 13;
+  static final int ACE = 14;
 }

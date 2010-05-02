@@ -1,4 +1,4 @@
-system_chart POKER_SYSTEM
+system_chart POKER
     indexing
         author: "Chris";
     explanation
@@ -6,6 +6,7 @@ system_chart POKER_SYSTEM
     
     cluster UTILITIES description "Utilities to implement functionality such as initilization."
     cluster POKER_TABLE description "Table cluster."  
+    cluster POKER_DEALER description "Dealer cluster."
 end
 
 cluster_chart POKER_TABLE
@@ -18,7 +19,7 @@ cluster_chart POKER_TABLE
     class HISTORY description "History of every hand played at this table."
     class PLAYER description "Instance of a player."
     class DEALER description "Dealer of the game."
-    cluster DEALER_ACTION description "Part that is responsible for all table actions from dealer aspect."
+    cluster DEALER_ACTIONS description "Part that is responsible for all table actions from dealer aspect."
     cluster POKER_PLAYER description "Player cluster."
 end
 
@@ -31,7 +32,7 @@ cluster_chart POKER_PLAYER
     class POKER_HAND description "The best out of five cards."
 end
 
-cluster_chart DEALER_ACTION
+cluster_chart DEALER_ACTIONS
     indexing
         in_cluster: "POKER_TABLE";
     -- class charts in Poker_Table.bon
@@ -51,7 +52,6 @@ end
 cluster_chart UTILITIES
     -- class charts in Utilities.bon
     class RANDOM_GENERATOR description "Facility for generating random numbers."
-    class INPUT_HANDLING description "Facility for input handling."
-    class PRINT_HANDLING description "Facility for printing."
+    class TEST_SUITE description "Facility for generated tests."
     class LOG_HANDLING description "Facility for logging."
 end

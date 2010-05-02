@@ -15,23 +15,3 @@ explanation
 command
     "Write event."
 end
-
-class_chart INPUT_HANDLING
-indexing
-    in_cluster: "UTILITIES";
-explanation
-    "Global set of instructions for handling input."
-command
-    "Get input."
-end
-
-class_chart PRINT_HANDLING
-indexing
-    in_cluster: "UTILITIES";
-explanation
-    "Global set of instructions for handling output."
-query
-    "Who wants to be printed?"
-command
-    "Print the one who is calling."
-end
