@@ -8,7 +8,6 @@ import poker.dealer.Button;
 import poker.dealer.Deck;
 import poker.dealer.Pot;
 
-
 /**
  * Dealer of the table.
  */
@@ -25,15 +24,15 @@ import poker.dealer.Pot;
   }
 
   /** The blind. */
-  /*@ spec_public @*/ private Blind blind;
+  /*@ spec_public @*/private Blind blind;
 
   /** The button. */
-  /*@ spec_public @*/ private Button button;
+  /*@ spec_public @*/private Button button;
 
   /** The deck. */
-  /*@ spec_public @*/ private Deck deck;
+  /*@ spec_public @*/private Deck deck;
 
   /** The pot. */
-  /*@ spec_public @*/ private  Pot pot;
+  /*@ spec_public @*/private Pot pot;
 
 }

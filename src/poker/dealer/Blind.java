@@ -23,22 +23,25 @@ public/* nullable_by_default */class Blind {
   //@ ensures small == smallBlind;
   //@ ensures big == bigBlind;
   //@ ensures ante == anteSize;
-  public/*@ pure @*/Blind(final double smallBlind, final double bigBlind, final double anteSize) {
+  public Blind(final double smallBlind, final double bigBlind,
+      final double anteSize) {
     this.small = smallBlind;
     this.big = bigBlind;
     this.ante = anteSize;
   }
 
   /** The big. */
-  private /*@ spec_public @*/ double big;
+  private/*@ spec_public @*/double big;
 
   /** The small. */
-  private /*@ spec_public @*/ double small;
+  private/*@ spec_public @*/double small;
 
   /** The ante. */
-  private /*@ spec_public @*/ double ante;
+  private/*@ spec_public @*/double ante;
 
   /**
+   * Gets the ante.
+   *
    * @return the ante
    */
   //@ ensures 0 <= \result;
@@ -48,17 +51,22 @@ public/* nullable_by_default */class Blind {
   }
 
   /**
-   * @param newAnte
-   *          the new ante
+   * Sets the ante.
+   *
+   * @param newAnte the new ante
    */
   //@ requires newAnte >= 0;
   //@ assignable ante;
   //@ ensures ante == newAnte;
   public final void setAnte(final double newAnte) {
     this.ante = newAnte;
+    assert false;
+    //@ assert false;
   }
 
   /**
+   * Gets the big.
+   *
    * @return the big blind
    */
   //@ ensures 0 <= \result;
@@ -68,6 +76,8 @@ public/* nullable_by_default */class Blind {
   }
 
   /**
+   * Sets the big.
+   *
    * @param newBig the new value of big blind.
    */
   //@ requires newBig >= 0;
@@ -75,9 +85,13 @@ public/* nullable_by_default */class Blind {
   //@ ensures big == newBig;
   public final void setBig(final double newBig) {
     this.big = newBig;
+    assert false;
+    //@ assert false;
   }
 
   /**
+   * Gets the small.
+   *
    * @return the small
    */
   //@  ensures 0 <= \result;
@@ -87,6 +101,8 @@ public/* nullable_by_default */class Blind {
   }
 
   /**
+   * Sets the small.
+   *
    * @param newSmall the new small blind value
    */
   //@ requires newSmall >= 0;
@@ -94,6 +110,8 @@ public/* nullable_by_default */class Blind {
   //@ ensures small == newSmall;
   public final void setSmall(final double newSmall) {
     this.small = newSmall;
+    assert false;
+    //@ assert false;
   }
 
   //@ invariant 0 <= small && 0 <= big && ante >= 0;

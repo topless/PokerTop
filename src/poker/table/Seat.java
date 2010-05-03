@@ -8,7 +8,7 @@ package poker.table;
  */
 public/* nullable_by_default */class Seat {
   /** The position. */
-  private /*@ spec_public @*/ final int position;
+  private/*@ spec_public @*/final int position;
 
   /**
    * Instantiates a new seat.
@@ -21,10 +21,12 @@ public/* nullable_by_default */class Seat {
   }
 
   /**
+   * Gets the position.
+   *
    * @return the position
    */
   //@ ensures \result == position;
-  public final /*@ pure @*/ int getPosition() {
+  public final/*@ pure @*/int getPosition() {
     return position;
   }
 

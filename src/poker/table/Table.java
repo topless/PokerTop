@@ -25,7 +25,7 @@ public/* nullable_by_default */class Table {
   public static final int TABLE_SIZE = 10;
 
   /** The seats. */
-  /*@ spec_public @*/ List seats = new ArrayList();
+  private /*@ spec_public @*/ List seats = new ArrayList();
 
   //@ public invariant seats.size() >= 2 && seats.size() <= 10;
 }

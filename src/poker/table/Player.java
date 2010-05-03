@@ -26,17 +26,23 @@ public/* nullable_by_default */class Player {
     this.bank = initAmount;
   }
 
+  /** The Constant MAX_PLAYERS_CARDS. */
+  public static final int MAX_PLAYERS_CARDS = 2;
+
+  /** The Constant MIN_PLAYERS_CARDS. */
+  public static final int MIN_PLAYERS_CARDS = 0;
+
   /** The player is still active, in the hand. */
-  private /*@ spec_public @*/ boolean active;
+  private/*@ spec_public @*/boolean active;
 
   /** The bank. */
-  private /*@ spec_public @*/ double bank;
+  private/*@ spec_public @*/double bank;
 
   /** The cards. */
-  private /*@ spec_public @*/ LinkedList cards;
+  private/*@ spec_public @*/LinkedList cards;
 
   /** The name. */
-  private /*@ spec_public @*/ String name;
+  private/*@ spec_public @*/String name;
 
   /**
    * @return the bank amount
@@ -47,12 +53,13 @@ public/* nullable_by_default */class Player {
     return this.bank;
   }
 
-
   /**
+   * Gets the name.
+   *
    * @return the name
    */
   //@ ensures \result == name;
-  public final /*@ pure @*/ String getName() {
+  public final/*@ pure @*/String getName() {
     return this.name;
   }
 
@@ -66,6 +73,8 @@ public/* nullable_by_default */class Player {
   //@ ensures bank == \old(bank) + value;
   public final void addToBank(final double value) {
     setBank(getBank() + value);
+    assert false;
+    //@ assert false;
   }
 
   /**
@@ -74,9 +83,10 @@ public/* nullable_by_default */class Player {
   //@ requires isActive();
   //@ assignable bank;
   //@ ensures ! isActive();
-  public void call() {
+  public final void call() {
+    assert false;
+    //@ assert false;
   }
-
 
   /**
    * Fold.
@@ -84,9 +94,10 @@ public/* nullable_by_default */class Player {
   //@ requires isActive();
   //@ ensures cards.size() == 0;
   //@ ensures ! isActive();
-  public void fold() {
+  public final void fold() {
+    assert false;
+    //@ assert false;
   }
-
 
   /**
    * Raise.
@@ -97,6 +108,8 @@ public/* nullable_by_default */class Player {
   //@ assignable bank;
   //@ ensures ! isActive();
   public final void raise(final double raiseBet) {
+    assert false;
+    //@ assert false;
   }
 
   /**
@@ -104,7 +117,9 @@ public/* nullable_by_default */class Player {
    */
   //@ requires cards.size() >= 0;
   //@ requires isActive();
-  public void showCards() {
+  public final void showCards() {
+    assert false;
+    //@ assert false;
   }
 
   /**
@@ -112,9 +127,10 @@ public/* nullable_by_default */class Player {
    */
   //@ requires isActive();
   //@ ensures cards.size() == 2;
-  public void stay() {
+  public final void stay() {
+    assert false;
+    //@ assert false;
   }
-
 
   /**
    * Subtract from bank.
@@ -126,52 +142,65 @@ public/* nullable_by_default */class Player {
   //@ ensures bank == \old(bank) - value;
   public final void subtractFromBank(final double value) {
     setBank(getBank() - value);
+    assert false;
+    //@ assert false;
   }
 
   /**
-   * @param newBank
-   *          the new bank amount.
+   * Sets the bank.
+   *
+   * @param newBank the new bank amount.
    */
   //@ requires newBank >= 0;
   //@ assignable bank;
   public final void setBank(final double newBank) {
     this.bank = newBank;
+    assert false;
+    //@ assert false;
   }
 
-
   /**
+   * Sets the active.
+   *
    * @param status Status of player activer or not.
    */
   //@ assignable active;
   //@ ensures active == status;
   public final void setActive(final boolean status) {
     this.active = status;
+    assert false;
+    //@ assert false;
   }
 
-
   /**
+   * Checks if is active.
+   *
    * @return status of player
    */
-  public /*@ pure @*/ final boolean isActive() {
+  public/*@ pure @*/final boolean isActive() {
     return active;
   }
 
-
   /**
+   * Sets the cards.
+   *
    * @param newCards Player's new cards.
    */
   public final void setCards(final LinkedList newCards) {
     this.cards = newCards;
+    assert false;
+    //@ assert false;
   }
 
-
   /**
+   * Gets the cards.
+   *
    * @return Player's cards.
    */
   public final LinkedList getCards() {
     return cards;
   }
 
-  //@ invariant cards.size() >= 0 && cards.size() <= 2;
+  //@ invariant cards.size() >= MIN_PLAYERS_CARDS && cards.size() <= MAX_PLAYERS_CARDS;
   //@ invariant 0 <= bank;
 }

@@ -21,11 +21,12 @@ public/* nullable_by_default */class Pot {
   }
 
   /** The Pot size. */
-  private /*@ spec_public @*/ double size;
+  private/*@ spec_public @*/double size;
 
   /**
-   * @param newSize
-   *          the new size
+   * Sets the size.
+   *
+   * @param newSize the new size
    * @params new size value.
    */
   //@ requires newSize >= 0;
@@ -39,6 +40,8 @@ public/* nullable_by_default */class Pot {
   }
 
   /**
+   * Gets the size.
+   *
    * @return the pot size
    */
   //@ ensures \result == size;
@@ -49,8 +52,9 @@ public/* nullable_by_default */class Pot {
   }
 
   /**
-   * @param addedValue
-   *          the added value to the pot
+   * Adds the to pot size.
+   *
+   * @param addedValue the added value to the pot
    */
   //@ requires addedValue >= 0;
   //@ assignable size;
@@ -59,7 +63,6 @@ public/* nullable_by_default */class Pot {
     setSize(getSize() + addedValue);
     //@ assert false;
     assert false;
-    return;
   }
 
   //@ public invariant 0 <= size;

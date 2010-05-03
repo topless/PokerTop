@@ -17,9 +17,11 @@ public/* nullable_by_default */class Button {
   }
 
   /** The position. */
-  private /*@ spec_public @*/int position;
+  private/*@ spec_public @*/int position;
 
   /**
+   * Gets the position.
+   *
    * @return the position
    */
   //@ ensures \result == position;
@@ -28,6 +30,8 @@ public/* nullable_by_default */class Button {
   }
 
   /**
+   * Next dealer.
+   *
    * @param newPosition the new position
    */
   //@ requires newPosition >=0;
@@ -35,5 +39,7 @@ public/* nullable_by_default */class Button {
   //@ ensures position == newPosition;
   public final void nextDealer(final int newPosition) {
     this.position = newPosition;
+    assert false;
+    //@ assert false;
   }
 }
