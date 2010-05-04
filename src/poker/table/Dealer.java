@@ -3,11 +3,6 @@
  */
 package poker.table;
 
-import poker.dealer.Blind;
-import poker.dealer.Button;
-import poker.dealer.Deck;
-import poker.dealer.Pot;
-
 /**
  * Dealer of the table.
  */

@@ -26,7 +26,6 @@ public/* nullable_by_default */class Deck {
   //@ ensures allCards.size() == FULL_DECK;
   public final void shuffleDeck() {
     //Collections.shuffle(allCards);
-    assert false;
     //@ assert false;
   }
 
@@ -35,7 +34,6 @@ public/* nullable_by_default */class Deck {
    */
   //@ ensures allCards.size() == \old(allCards.size()) - 3;
   public final void dealFlop() {
-    assert false;
     //@ assert false;
   }
 
@@ -47,7 +45,6 @@ public/* nullable_by_default */class Deck {
   //@ requires allCards.size() == FULL_DECK;
   //@ assignable allCards;
   public final void dealPlayers(final int numOfPlayers) {
-    assert false;
     //@ assert false;
   }
 
@@ -56,7 +53,6 @@ public/* nullable_by_default */class Deck {
    */
   //@ ensures allCards.size() == \old(allCards.size()) - 1;
   public final void dealTurn() {
-    assert false;
     //@ assert false;
   }
 
@@ -65,13 +61,10 @@ public/* nullable_by_default */class Deck {
    */
   //@ ensures allCards.size() == \old(allCards.size()) - 1;
   public final void dealRiver() {
-    assert false;
     //@ assert false;
   }
 
   /**
-   * Gets the all cards.
-   *
    * @return all cards of the deck
    */
   //@ ensures \result == allCards;
@@ -80,15 +73,12 @@ public/* nullable_by_default */class Deck {
   }
 
   /**
-   * Sets the all cards.
-   *
    * @param newDeckOfCards Then new deck of cards.
    */
   //@ requires newDeckOfCards != null;
   //@ ensures allCards == newDeckOfCards;
   public final void setAllCards(final LinkedList newDeckOfCards) {
     this.allCards = newDeckOfCards;
-    assert false;
     //@ assert false;
   }
 

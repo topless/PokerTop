@@ -1,5 +1,5 @@
 /*
- * PokerMain.java
+ * PokerSystem.java
  */
 package poker;
 
@@ -12,8 +12,7 @@ class PokerSystem {
    * The main method.
    * @param args the arguments
    */
-  public static void main(String[] args) {
-    assert false;
+  public static void main(final String[] args) {
     //@ assert false;
   }
 

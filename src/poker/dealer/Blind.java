@@ -1,5 +1,4 @@
 /*
- * 
  */
 package poker.dealer;
 
@@ -60,7 +59,6 @@ public/* nullable_by_default */class Blind {
   //@ ensures ante == newAnte;
   public final void setAnte(final double newAnte) {
     this.ante = newAnte;
-    assert false;
     //@ assert false;
   }
 
@@ -85,7 +83,6 @@ public/* nullable_by_default */class Blind {
   //@ ensures big == newBig;
   public final void setBig(final double newBig) {
     this.big = newBig;
-    assert false;
     //@ assert false;
   }
 
@@ -110,7 +107,6 @@ public/* nullable_by_default */class Blind {
   //@ ensures small == newSmall;
   public final void setSmall(final double newSmall) {
     this.small = newSmall;
-    assert false;
     //@ assert false;
   }
 

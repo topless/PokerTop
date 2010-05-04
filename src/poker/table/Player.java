@@ -73,7 +73,6 @@ public/* nullable_by_default */class Player {
   //@ ensures bank == \old(bank) + value;
   public final void addToBank(final double value) {
     setBank(getBank() + value);
-    assert false;
     //@ assert false;
   }
 
@@ -84,7 +83,6 @@ public/* nullable_by_default */class Player {
   //@ assignable bank;
   //@ ensures ! isActive();
   public final void call() {
-    assert false;
     //@ assert false;
   }
 
@@ -95,7 +93,6 @@ public/* nullable_by_default */class Player {
   //@ ensures cards.size() == 0;
   //@ ensures ! isActive();
   public final void fold() {
-    assert false;
     //@ assert false;
   }
 
@@ -108,7 +105,6 @@ public/* nullable_by_default */class Player {
   //@ assignable bank;
   //@ ensures ! isActive();
   public final void raise(final double raiseBet) {
-    assert false;
     //@ assert false;
   }
 
@@ -118,7 +114,6 @@ public/* nullable_by_default */class Player {
   //@ requires cards.size() >= 0;
   //@ requires isActive();
   public final void showCards() {
-    assert false;
     //@ assert false;
   }
 
@@ -128,7 +123,6 @@ public/* nullable_by_default */class Player {
   //@ requires isActive();
   //@ ensures cards.size() == 2;
   public final void stay() {
-    assert false;
     //@ assert false;
   }
 
@@ -142,7 +136,6 @@ public/* nullable_by_default */class Player {
   //@ ensures bank == \old(bank) - value;
   public final void subtractFromBank(final double value) {
     setBank(getBank() - value);
-    assert false;
     //@ assert false;
   }
 
@@ -155,7 +148,6 @@ public/* nullable_by_default */class Player {
   //@ assignable bank;
   public final void setBank(final double newBank) {
     this.bank = newBank;
-    assert false;
     //@ assert false;
   }
 
@@ -168,7 +160,6 @@ public/* nullable_by_default */class Player {
   //@ ensures active == status;
   public final void setActive(final boolean status) {
     this.active = status;
-    assert false;
     //@ assert false;
   }
 
@@ -188,7 +179,6 @@ public/* nullable_by_default */class Player {
    */
   public final void setCards(final LinkedList newCards) {
     this.cards = newCards;
-    assert false;
     //@ assert false;
   }
 

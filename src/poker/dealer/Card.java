@@ -55,7 +55,6 @@ public/* nullable_by_default */class Card {
   //@ ensures rank == newRank;
   public final void setRank(final int newRank) {
     this.rank = newRank;
-    assert false;
     //@ assert false;
   }
 
@@ -70,8 +69,6 @@ public/* nullable_by_default */class Card {
   }
 
   /**
-   * Sets the suit.
-   *
    * @param newSuit the new suit
    */
   //@ requires newSuit >=0 && newSuit <= 3;
@@ -79,13 +76,10 @@ public/* nullable_by_default */class Card {
   //@ ensures suit == newSuit;
   public final void setSuit(final int newSuit) {
     suit = newSuit;
-    assert false;
     //@ assert false;
   }
 
   /**
-   * Gets the suit.
-   *
    * @return the suit
    */
   //@ ensures \result == suit;

@@ -35,8 +35,6 @@ public/* nullable_by_default */class Pot {
   public final void setSize(final double newSize) {
     this.size = newSize;
     //@ assert size == 0;
-    assert size == 0;
-    return;
   }
 
   /**
@@ -47,7 +45,6 @@ public/* nullable_by_default */class Pot {
   //@ ensures \result == size;
   public final/*@ pure @*/double getSize() {
     //@ assert size == 0;
-    assert size == 0;
     return size;
   }
 
@@ -62,7 +59,6 @@ public/* nullable_by_default */class Pot {
   public final void addToPotSize(final double addedValue) {
     setSize(getSize() + addedValue);
     //@ assert false;
-    assert false;
   }
 
   //@ public invariant 0 <= size;
