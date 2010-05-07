@@ -15,7 +15,7 @@ public/* nullable_by_default */class Pot {
    */
   //@ requires initSize >= 0;
   //@ assignable this.size;
-  //@ ensures this.size == initSize;
+  //@ ensures size == initSize;
   public/*@ pure @*/Pot(final double initSize) {
     this.size = initSize;
   }
@@ -24,22 +24,16 @@ public/* nullable_by_default */class Pot {
   private/*@ spec_public @*/double size;
 
   /**
-   * Sets the size.
-   *
    * @param newSize the new size
-   * @params new size value.
    */
   //@ requires newSize >= 0;
   //@ assignable size;
-  //@ ensures  getSize() == newSize;
+  //@ ensures  size == newSize;
   public final void setSize(final double newSize) {
     this.size = newSize;
-    //@ assert size == 0;
   }
 
   /**
-   * Gets the size.
-   *
    * @return the pot size
    */
   //@ ensures \result == size;
@@ -49,16 +43,15 @@ public/* nullable_by_default */class Pot {
   }
 
   /**
-   * Adds the to pot size.
+   * Adds the value to pot size.
    *
-   * @param addedValue the added value to the pot
+   * @param addedValue The added value to the pot.
    */
   //@ requires addedValue >= 0;
   //@ assignable size;
   //@ ensures size == \old(size) + addedValue;
   public final void addToPotSize(final double addedValue) {
     setSize(getSize() + addedValue);
-    //@ assert false;
   }
 
   //@ public invariant 0 <= size;

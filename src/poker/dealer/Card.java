@@ -8,25 +8,6 @@ package poker.dealer;
  */
 public/* nullable_by_default */class Card {
 
-  /**
-   * Instantiates a new card.
-   * @param cardRank
-   *          Rank of the card.
-   * @param cardSuit
-   *          Suit of the card.
-   */
-  //@ public normal_behavior
-  //@ requires 2 <= cardRank;
-  //@ requires 14 >= cardRank;
-  //@ requires 0 <= cardSuit;
-  //@ requires 3 >= cardSuit;
-  //@ ensures rank == cardRank;
-  //@ ensures suit == cardSuit;
-  public/*@ pure @*/Card(final int cardRank, final int cardSuit) {
-    this.rank = cardRank;
-    this.suit = cardSuit;
-  }
-
   /** The Constant MIN_SUIT. */
   public static final int MIN_SUIT = 0;
 
@@ -38,6 +19,24 @@ public/* nullable_by_default */class Card {
 
   /** The Constant MAX_RANK. */
   public static final int MAX_RANK = 14;
+  /**
+   * Instantiates a new card.
+   * @param cardRank
+   *          Rank of the card.
+   * @param cardSuit
+   *          Suit of the card.
+   */
+  //@ public normal_behavior
+  //@ requires MIN_RANK <= cardRank;
+  //@ requires MAX_RANK >= cardRank;
+  //@ requires MIN_SUIT <= cardSuit;
+  //@ requires MAX_SUIT >= cardSuit;
+  //@ ensures rank == cardRank;
+  //@ ensures suit == cardSuit;
+  public/*@ pure @*/Card(final int cardRank, final int cardSuit) {
+    this.rank = cardRank;
+    this.suit = cardSuit;
+  }
 
   /** The suit. */
   private/*@ spec_public @*/int suit;
@@ -46,8 +45,6 @@ public/* nullable_by_default */class Card {
   private/*@ spec_public @*/int rank;
 
   /**
-   * Sets the rank.
-   *
    * @param newRank the new value
    */
   //@ requires newRank >=2 && newRank <= 14;
@@ -55,12 +52,9 @@ public/* nullable_by_default */class Card {
   //@ ensures rank == newRank;
   public final void setRank(final int newRank) {
     this.rank = newRank;
-    //@ assert false;
   }
 
   /**
-   * Gets the rank.
-   *
    * @return the rank of card
    */
   //@ ensures \result == rank;
@@ -76,7 +70,6 @@ public/* nullable_by_default */class Card {
   //@ ensures suit == newSuit;
   public final void setSuit(final int newSuit) {
     suit = newSuit;
-    //@ assert false;
   }
 
   /**

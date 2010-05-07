@@ -3,7 +3,6 @@
 	<name>PokerTop</name>
 	<comment></comment>
 	<projects>
-		<project>jmlspecs</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
@@ -41,6 +40,11 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
+		<buildCommand>
+			<name>mobius.escjava2.plugin.autocheckEscjavaBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
@@ -51,5 +55,6 @@
 		<nature>ch.ethz.inf.pm.jml.plugin.CheckerNature</nature>
 		<nature>net.sf.eclipsecs.core.CheckstyleNature</nature>
 		<nature>com.atlassw.tools.eclipse.checkstyle.CheckstyleNature</nature>
+		<nature>mobius.escjava2.plugin.autocheckEscjavaNature</nature>
 	</natures>
 </projectDescription>

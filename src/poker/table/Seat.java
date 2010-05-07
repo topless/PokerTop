@@ -7,22 +7,40 @@ package poker.table;
  * Representation of a seat at the table.
  */
 public/* nullable_by_default */class Seat {
-  /** The position. */
-  private/*@ spec_public @*/final int position;
-
   /**
    * Instantiates a new seat.
-   * @param newPosition
-   *          the new position
+   * @param initPosition
+   *          The starting position of dealer button.
    */
-  //@ ensures position == newPosition;
-  public/*@ pure @*/Seat(final int newPosition) {
-    this.position = newPosition;
+  //@ ensures position == initPosition;
+  public/*@ pure @*/Seat(final int initPosition) {
+    this.position = initPosition;
+  }
+
+  /** The position. */
+  private /*@ spec_public @*/ int position;
+
+  /** Player Id that occupies the specific seat. */
+  private /*@ spec_public @*/ int playerId;
+
+
+  /**
+   * @return Player Id;
+   */
+  public final int getPlayerId() {
+    return playerId;
   }
 
   /**
-   * Gets the position.
-   *
+   * @param id Player's id to be assigned.
+   */
+  //@ assignable playerId;
+  //@ ensures playerId == id;
+  public final void setPlayerId(final int id) {
+    this.playerId = id;
+  }
+
+  /**
    * @return the position
    */
   //@ ensures \result == position;
@@ -30,5 +48,6 @@ public/* nullable_by_default */class Seat {
     return position;
   }
 
-  //@ invariant position >=0;
+  //@ public invariant position >= 0;
+  //@ public invariant playerId >= 0;
 }

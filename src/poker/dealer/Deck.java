@@ -10,13 +10,19 @@ import java.util.LinkedList;
  */
 public/* nullable_by_default */class Deck {
 
-  /** All the cards of the deck. */
-  /*@ spec_public @*/private LinkedList allCards;
-
   /**
    * Number of cards of a full deck.
    */
   public static final int FULL_DECK = 52;
+
+  /**
+   * Minimum number of players.
+   */
+  public static final int MIN_NUM_OF_PLAYERS = 2;
+
+  /** All the cards of the deck. */
+  //TODO Define list type <Card> JMLc error too many parametes ???
+  /*@ spec_public @*/private LinkedList allCards;
 
   /**
    * Shuffle deck.
@@ -26,48 +32,53 @@ public/* nullable_by_default */class Deck {
   //@ ensures allCards.size() == FULL_DECK;
   public final void shuffleDeck() {
     //Collections.shuffle(allCards);
-    //@ assert false;
   }
 
   /**
    * Deal flop.
    */
+  //@ assignable allCards;
   //@ ensures allCards.size() == \old(allCards.size()) - 3;
   public final void dealFlop() {
-    //@ assert false;
   }
 
   /**
    * Deal players.
-   * @param numOfPlayers number of players to be dealt cards.
+   * @param numOfPlayers Number of players to be dealt cards.
    */
-  //@ requires numOfPlayers >= 2;
+  //@ requires numOfPlayers >= MIN_NUM_OF_PLAYERS;
   //@ requires allCards.size() == FULL_DECK;
   //@ assignable allCards;
+  //@ ensures allCards.size() == \old(allCards.size()) - 1;
   public final void dealPlayers(final int numOfPlayers) {
-    //@ assert false;
+    /*for (int i=0; i<= numOfPlayers; i++ ){
+      allCards.pop();
+      allCards.pop();
+    }*/
   }
 
   /**
    * Deal turn.
    */
+  //@ assignable allCards;
   //@ ensures allCards.size() == \old(allCards.size()) - 1;
   public final void dealTurn() {
-    //@ assert false;
+    //allCards.pop();
   }
 
   /**
    * Deal river.
    */
+  //@ assignable allCards;
   //@ ensures allCards.size() == \old(allCards.size()) - 1;
   public final void dealRiver() {
-    //@ assert false;
+    //allCards.pop();
   }
 
   /**
    * @return all cards of the deck
    */
-  //@ ensures \result == allCards;
+  // ensures \result == allCards;
   public final LinkedList getAllCards() {
     return allCards;
   }
@@ -76,10 +87,10 @@ public/* nullable_by_default */class Deck {
    * @param newDeckOfCards Then new deck of cards.
    */
   //@ requires newDeckOfCards != null;
+  //@ assignable allCards;
   //@ ensures allCards == newDeckOfCards;
   public final void setAllCards(final LinkedList newDeckOfCards) {
     this.allCards = newDeckOfCards;
-    //@ assert false;
   }
 
   //@ invariant allCards.size() <= FULL_DECK && allCards.size() >= 0;

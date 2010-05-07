@@ -17,7 +17,7 @@ public/* nullable_by_default */class Button {
   }
 
   /** The position. */
-  private/*@ spec_public @*/int position;
+  private /*@ spec_public @*/ int position;
 
   /**
    * @return the position
@@ -28,15 +28,21 @@ public/* nullable_by_default */class Button {
   }
 
   /**
-   * Next dealer.
-   *
    * @param newPosition the new position
    */
   //@ requires newPosition >=0;
   //@ assignable position;
   //@ ensures position == newPosition;
-  public final void nextDealer(final int newPosition) {
+  public final void setPosition(final int newPosition) {
     this.position = newPosition;
-    //@ assert false;
   }
+  /**
+   * Next dealer.
+   * @param currentPosition the new position
+   */
+  public final void nextDealer(final int currentPosition) {
+    //TODO table calculations to find next valid position.
+  }
+
+
 }

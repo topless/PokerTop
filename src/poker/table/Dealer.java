@@ -3,6 +3,10 @@
  */
 package poker.table;
 
+import poker.dealer.Blind;
+import poker.dealer.Button;
+import poker.dealer.Deck;
+import poker.dealer.Pot;
 /**
  * Dealer of the table.
  */
@@ -17,6 +21,7 @@ package poker.table;
     this.deck = new Deck();
     this.pot = new Pot(0);*/
   }
+
 
   /** The blind. */
   /*@ spec_public @*/private Blind blind;

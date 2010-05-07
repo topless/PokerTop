@@ -30,7 +30,7 @@ public/* nullable_by_default */class Blind {
   }
 
   /** The big. */
-  private/*@ spec_public @*/double big;
+  private /*@ spec_public @*/double big;
 
   /** The small. */
   private/*@ spec_public @*/double small;
@@ -39,8 +39,19 @@ public/* nullable_by_default */class Blind {
   private/*@ spec_public @*/double ante;
 
   /**
-   * Gets the ante.
-   *
+   * Increase blinds to next level.
+   */
+  //@ requires newSmallBlind >= small && newBigBlind >= big && newAnteSize >= ante;
+  //@ assignable big, small, ante;
+  //@ ensures big == newBigBlind && small == newSmallBlind && ante == newAnteSize;
+  public final void increaseBlind(final double newSmallBlind, final double newBigBlind,
+      final double newAnteSize) {
+    setSmall(newSmallBlind);
+    setBig(newBigBlind);
+    setAnte(newAnteSize);
+  }
+
+  /**
    * @return the ante
    */
   //@ ensures 0 <= \result;
@@ -50,8 +61,6 @@ public/* nullable_by_default */class Blind {
   }
 
   /**
-   * Sets the ante.
-   *
    * @param newAnte the new ante
    */
   //@ requires newAnte >= 0;
@@ -59,12 +68,9 @@ public/* nullable_by_default */class Blind {
   //@ ensures ante == newAnte;
   public final void setAnte(final double newAnte) {
     this.ante = newAnte;
-    //@ assert false;
   }
 
   /**
-   * Gets the big.
-   *
    * @return the big blind
    */
   //@ ensures 0 <= \result;
@@ -74,8 +80,6 @@ public/* nullable_by_default */class Blind {
   }
 
   /**
-   * Sets the big.
-   *
    * @param newBig the new value of big blind.
    */
   //@ requires newBig >= 0;
@@ -83,12 +87,9 @@ public/* nullable_by_default */class Blind {
   //@ ensures big == newBig;
   public final void setBig(final double newBig) {
     this.big = newBig;
-    //@ assert false;
   }
 
   /**
-   * Gets the small.
-   *
    * @return the small
    */
   //@  ensures 0 <= \result;
@@ -98,8 +99,6 @@ public/* nullable_by_default */class Blind {
   }
 
   /**
-   * Sets the small.
-   *
    * @param newSmall the new small blind value
    */
   //@ requires newSmall >= 0;
@@ -110,5 +109,5 @@ public/* nullable_by_default */class Blind {
     //@ assert false;
   }
 
-  //@ invariant 0 <= small && 0 <= big && ante >= 0;
+  //@ public invariant 0 <= small && 0 <= big && ante >= 0;
 }
