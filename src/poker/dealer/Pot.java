@@ -7,6 +7,13 @@ package poker.dealer;
  * Pot of the table.
  */
 public/* nullable_by_default */class Pot {
+  /** The Pot size. */
+  private/*@ spec_public @*/double size;
+
+  //@ invariant 0 <= size;
+
+  /** Max pot size. */
+  public static final double MAX_POT_SIZE = Double.MAX_VALUE;
 
   /**
    * Instantiates a new pot.
@@ -14,14 +21,11 @@ public/* nullable_by_default */class Pot {
    *        size to initialize pot.
    */
   //@ requires initSize >= 0;
-  //@ assignable this.size;
+  //@ assignable size;
   //@ ensures size == initSize;
-  public/*@ pure @*/Pot(final double initSize) {
+  public Pot(final double initSize) {
     this.size = initSize;
   }
-
-  /** The Pot size. */
-  private/*@ spec_public @*/double size;
 
   /**
    * @param newSize the new size
@@ -31,6 +35,8 @@ public/* nullable_by_default */class Pot {
   //@ ensures  size == newSize;
   public final void setSize(final double newSize) {
     this.size = newSize;
+    //@ assert false;
+    assert false;
   }
 
   /**
@@ -38,7 +44,8 @@ public/* nullable_by_default */class Pot {
    */
   //@ ensures \result == size;
   public final/*@ pure @*/double getSize() {
-    //@ assert size == 0;
+    //@ assert false;
+    assert false;
     return size;
   }
 
@@ -51,8 +58,10 @@ public/* nullable_by_default */class Pot {
   //@ assignable size;
   //@ ensures size == \old(size) + addedValue;
   public final void addToPotSize(final double addedValue) {
-    setSize(getSize() + addedValue);
+    //setSize(getSize() + addedValue);
+    //@ assert false;
+    assert false;
   }
 
-  //@ public invariant 0 <= size;
+
 }

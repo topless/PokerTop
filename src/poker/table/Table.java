@@ -3,7 +3,8 @@
  */
 package poker.table;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A poker table.
@@ -20,24 +21,27 @@ public/* nullable_by_default */class Table {
    */
   public static final int MIN_PLAYERS = 2;
 
+  /** Dealer of the table. */
+  private /*@ spec_public @*/ Dealer dealer = new Dealer();
+
+  /** The list of the seats with players. */
+  private /*@ spec_public @*/ List seats = new ArrayList();
+
+  //@ invariant seats.size() >= MIN_PLAYERS && seats.size() <= TABLE_SIZE;
+
   /**
    * Instantiates a new table.
    */
-  public/*@ pure @*/Table() {
+  public Table() {
   }
-
-  private /*@ spec_public @*/ Dealer dealer = new Dealer();
-
-  //TODO List<Player>
-  /** The list of the seats with players. */
-  private /*@ spec_public @*/ LinkedList seats = new LinkedList();
 
   /**
    * @return seats of the table
    */
-  //@ assignable seats;
   //@ ensures \result == seats;
-  public final LinkedList getSeats() {
+  public final/*@ pure @*/List getSeats() {
+    //@ assert false;
+    assert false;
     return seats;
   }
 
@@ -45,10 +49,11 @@ public/* nullable_by_default */class Table {
    * @param initSeats set seats.
    */
   // TODO Loop through initSeats for nullity.
+  //@ assignable seats;
   //@ ensures seats == initSeats;
-  public final void setSeats(final LinkedList initSeats) {
+  private final void setSeats(final /*@ non_null @*/List initSeats) {
     this.seats = initSeats;
+    //@ assert false;
+    assert false;
   }
-
-  //@ public invariant seats.size() >= MIN_PLAYERS && seats.size() <= TABLE_SIZE;
 }

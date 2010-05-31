@@ -1,0 +1,13 @@
+digraph x {
+0->1
+0->0[color=blue]
+1->2
+1->0[color=blue]
+2->3
+2->1[color=blue]
+3->4
+3->2[color=blue]
+4->5
+4->3[color=blue]
+5->4[color=blue]
+}

@@ -12,17 +12,6 @@ import poker.dealer.Pot;
  */
 /* nullable_by_default */class Dealer {
 
-  /**
-   * Instantiates a new dealer.
-   */
-  public/*@ pure @*/Dealer() {
-    /*this.blind = new Blind(0, 0, 0);
-    this.button = new Button();
-    this.deck = new Deck();
-    this.pot = new Pot(0);*/
-  }
-
-
   /** The blind. */
   /*@ spec_public @*/private Blind blind;
 
@@ -34,5 +23,15 @@ import poker.dealer.Pot;
 
   /** The pot. */
   /*@ spec_public @*/private Pot pot;
+
+  /**
+   * Instantiates a new dealer.
+   */
+  public Dealer() {
+    /*this.blind = new Blind(0, 0, 0);
+    this.button = new Button();
+    this.deck = new Deck();
+    this.pot = new Pot(0);*/
+  }
 
 }

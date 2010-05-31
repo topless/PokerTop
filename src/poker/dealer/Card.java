@@ -19,24 +19,6 @@ public/* nullable_by_default */class Card {
 
   /** The Constant MAX_RANK. */
   public static final int MAX_RANK = 14;
-  /**
-   * Instantiates a new card.
-   * @param cardRank
-   *          Rank of the card.
-   * @param cardSuit
-   *          Suit of the card.
-   */
-  //@ public normal_behavior
-  //@ requires MIN_RANK <= cardRank;
-  //@ requires MAX_RANK >= cardRank;
-  //@ requires MIN_SUIT <= cardSuit;
-  //@ requires MAX_SUIT >= cardSuit;
-  //@ ensures rank == cardRank;
-  //@ ensures suit == cardSuit;
-  public/*@ pure @*/Card(final int cardRank, final int cardSuit) {
-    this.rank = cardRank;
-    this.suit = cardSuit;
-  }
 
   /** The suit. */
   private/*@ spec_public @*/int suit;
@@ -44,21 +26,49 @@ public/* nullable_by_default */class Card {
   /** The value. */
   private/*@ spec_public @*/int rank;
 
+  //@ invariant MIN_RANK <= rank && MAX_RANK >= rank;
+  //@ invariant MIN_SUIT <= suit && MAX_SUIT >= suit;
+
+  /**
+   * Instantiates a new card.
+   * @param cardRank
+   *          Rank of the card.
+   * @param cardSuit
+   *          Suit of the card.
+   */
+   /*@ requires MIN_RANK <= cardRank;
+       requires MAX_RANK >= cardRank;
+       requires MIN_SUIT <= cardSuit;
+       requires MAX_SUIT >= cardSuit;
+       ensures rank == cardRank;
+       ensures suit == cardSuit;
+    */
+  public Card(final int cardRank, final int cardSuit) {
+    // public normal_behavior
+    this.rank = cardRank;
+    this.suit = cardSuit;
+  }
+
   /**
    * @param newRank the new value
    */
-  //@ requires newRank >=2 && newRank <= 14;
-  //@ assignable rank;
-  //@ ensures rank == newRank;
+  /*@ requires newRank >=2 && newRank <= 14;
+      assignable rank;
+      ensures rank == newRank;
+   */
   public final void setRank(final int newRank) {
     this.rank = newRank;
+    //@ assert false;
+    assert false;
   }
 
   /**
    * @return the rank of card
    */
   //@ ensures \result == rank;
-  public final int getRank() {
+  public final/*@ pure @*/ int getRank() {
+    //@ assert false;
+    assert false;
     return this.rank;
   }
 
@@ -70,18 +80,21 @@ public/* nullable_by_default */class Card {
   //@ ensures suit == newSuit;
   public final void setSuit(final int newSuit) {
     suit = newSuit;
+    //@ assert false;
+    assert false;
   }
 
   /**
    * @return the suit
    */
   //@ ensures \result == suit;
-  public final int getSuit() {
+  public final/*@ pure @*/int getSuit() {
+    //@ assert false;
+    assert false;
     return suit;
   }
 
-  //public invariant MIN_RANK <= rank && MAX_RANK >= rank;
-  //public invariant MIN_SUIT <= suit && MAX_SUIT >= suit;
+
  static class Suit {
     public static final int CLUBS = 0;
     public static final int DIAMONDS = 1;

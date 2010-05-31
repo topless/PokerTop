@@ -3,6 +3,7 @@
 	<name>PokerTop</name>
 	<comment></comment>
 	<projects>
+		<project>jmlspecs</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

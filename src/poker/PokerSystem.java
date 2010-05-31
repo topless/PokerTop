@@ -3,6 +3,7 @@
  */
 package poker;
 
+
 /**
  * The Class PokerSystem.
  */
@@ -14,6 +15,7 @@ class PokerSystem {
    */
   public static void main(final String[] args) {
     //@ assert false;
+    assert false;
   }
 
 }

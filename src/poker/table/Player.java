@@ -3,29 +3,12 @@
  */
 package poker.table;
 
-import java.util.LinkedList;
+import java.util.List;
 
 /**
  * A poker player.
  */
 public/* nullable_by_default */class Player {
-
-  /**
-   * Instantiates a new player.
-   * @param newId
-   *          players Id
-   * @param initAmount
-   *          the init amount
-   */
-  //@ requires initAmount >=0 && id >=0;
-  //@ assignable id, bank;
-  //@ ensures id == newId && bank == initAmount;
-  public/*@ pure @*/Player(final int newId,
-      final double initAmount) {
-    this.id = newId;
-    this.bank = initAmount;
-  }
-
   /** The Constant MAX_PLAYERS_CARDS. */
   public static final int MAX_PLAYERS_CARDS = 2;
 
@@ -39,10 +22,31 @@ public/* nullable_by_default */class Player {
   private/*@ spec_public @*/double bank;
 
   /** The cards. */
-  private/*@ spec_public @*/LinkedList cards;
+  private/*@ spec_public @*/List cards;
 
   /** The name. */
   private/*@ spec_public @*/int id;
+
+  //@ invariant cards.size() >= MIN_PLAYERS_CARDS && cards.size() <= MAX_PLAYERS_CARDS;
+  //@ invariant 0 <= bank;
+
+  /**
+   * Instantiates a new player.
+   * @param newId
+   *          players Id
+   * @param initAmount
+   *          the init amount
+   */
+  //@ requires initAmount >=0 && id >=0;
+  //@ assignable id, bank;
+  //@ ensures id == newId && bank == initAmount;
+  public Player(final int newId,
+      final double initAmount) {
+    this.id = newId;
+    this.bank = initAmount;
+  }
+
+
 
   /**
    * @return the bank amount
@@ -50,6 +54,8 @@ public/* nullable_by_default */class Player {
   //@ requires bank >= 0;
   //@ ensures \result == bank ;
   private/*@ pure @*/double getBank() {
+    //@ assert false;
+    assert false;
     return this.bank;
   }
 
@@ -58,6 +64,8 @@ public/* nullable_by_default */class Player {
    */
   //@ ensures \result == id;
   public final/*@ pure @*/int getId() {
+    //@ assert false;
+    assert false;
     return this.id;
   }
 
@@ -71,6 +79,8 @@ public/* nullable_by_default */class Player {
   //@ ensures bank == \old(bank) + value;
   public final void addToBank(final double value) {
     setBank(getBank() + value);
+    //@ assert false;
+    assert false;
   }
 
   /**
@@ -84,6 +94,8 @@ public/* nullable_by_default */class Player {
   //@ ensures bank == \old(bank) - betValue;
   public final void call(final double betValue) {
     setBank(getBank() - betValue);
+    //@ assert false;
+    assert false;
   }
 
   /**
@@ -95,6 +107,8 @@ public/* nullable_by_default */class Player {
   //@ ensures ! isActive();
   public final void fold() {
     setActive(false);
+    //@ assert false;
+    assert false;
   }
 
   /**
@@ -107,6 +121,8 @@ public/* nullable_by_default */class Player {
   //@ ensures bank == \old(bank) - betValue;
   public final void raise(final double betValue) {
     setBank(getBank() - betValue);
+    //@ assert false;
+    assert false;
   }
 
   /**
@@ -119,6 +135,8 @@ public/* nullable_by_default */class Player {
   //@ ensures ! isActive();
   public final void showCards() {
     setActive(false);
+    //@ assert false;
+    assert false;
   }
 
   /**
@@ -126,7 +144,9 @@ public/* nullable_by_default */class Player {
    */
   //@ requires isActive();
   //@ ensures cards.size() == MAX_PLAYERS_CARDS;
-  public final void stay() {
+  public final/*@ pure @*/void stay() {
+    //@ assert false;
+    assert false;
   }
 
   /**
@@ -137,6 +157,8 @@ public/* nullable_by_default */class Player {
 
   public final void subtractFromBank(final double value) {
     setBank(getBank() - value);
+    //@ assert false;
+    assert false;
   }
 
   /**
@@ -146,6 +168,8 @@ public/* nullable_by_default */class Player {
   //@ assignable bank;
   public final void setBank(final double newBank) {
     this.bank = newBank;
+    //@ assert false;
+    assert false;
   }
 
   /**
@@ -155,6 +179,8 @@ public/* nullable_by_default */class Player {
   //@ ensures active == status;
   public final void setActive(final boolean status) {
     this.active = status;
+    //@ assert false;
+    assert false;
   }
 
   /**
@@ -163,6 +189,8 @@ public/* nullable_by_default */class Player {
    */
   //@ ensures \result == active;
   public/*@ pure @*/final boolean isActive() {
+    //@ assert false;
+    assert false;
     return active;
   }
 
@@ -172,18 +200,19 @@ public/* nullable_by_default */class Player {
   //@ requires newCards != null;
   //@ assignable cards;
   //@ ensures cards == newCards;
-  public final void setCards(final LinkedList newCards) {
+  public final void setCards(final List newCards) {    
     this.cards = newCards;
+    //@ assert false;
+    assert false;
   }
 
   /**
    * @return Player's cards.
    */
   //@ ensures \result == cards;
-  public final LinkedList getCards() {
+  public final/*@ pure @*/List getCards() {
+    //@ assert false;
+    assert false;
     return cards;
   }
-
-  //@ public invariant cards.size() >= MIN_PLAYERS_CARDS && cards.size() <= MAX_PLAYERS_CARDS;
-  //@ public invariant 0 <= bank;
 }
