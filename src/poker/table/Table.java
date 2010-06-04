@@ -40,7 +40,7 @@ public/* nullable_by_default */class Table {
    */
   //@ ensures \result == seats;
   public final/*@ pure @*/List getSeats() {
-    //@ assert false;
+    // assert false;
     assert false;
     return seats;
   }
@@ -53,7 +53,7 @@ public/* nullable_by_default */class Table {
   //@ ensures seats == initSeats;
   private final void setSeats(final /*@ non_null @*/List initSeats) {
     this.seats = initSeats;
-    //@ assert false;
+    // assert false;
     assert false;
   }
 }

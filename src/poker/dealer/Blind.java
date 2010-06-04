@@ -16,9 +16,6 @@ public/* nullable_by_default */class Blind {
   /** The ante. */
   private/*@ spec_public @*/double ante;
 
-
-
-
   /**
    * Creates a new blind.
    * @param smallBlind
@@ -28,7 +25,8 @@ public/* nullable_by_default */class Blind {
    * @param anteSize
    *          the size of ante.
    */
-  /*@ requires smallBlind >= 0;
+  /*@ public normal_behavior
+      requires smallBlind >= 0;
       requires bigBlind >= 0;
       requires anteSize >=0;
       assignable small, big, ante;
@@ -43,15 +41,14 @@ public/* nullable_by_default */class Blind {
     this.ante = anteSize;
   }
 
-
-
   /**
    * Increase blinds to next level.
    * @param newSmallBlind Next value of small blind.
    * @param newBigBlind Next value of big blind.
    * @param newAnteSize Next value of next ante.
    */
-  /*@ requires 0 <= newSmallBlind & small < newSmallBlind;
+  /*@ public normal_behavior
+      requires 0 <= newSmallBlind & small < newSmallBlind;
       requires 0 <= newBigBlind & big < newBigBlind;
       requires 0 <= newAnteSize & ante < newAnteSize;
       assignable big, small, ante;
@@ -64,78 +61,91 @@ public/* nullable_by_default */class Blind {
     setAnte(newAnteSize);
     setSmall(newSmallBlind);
     setBig(newBigBlind);
-    //assert false;
+    // assert false;
+    assert false;
   }
 
   /**
    * @return the ante
    */
-  /*@ requires ante >= 0;
+  /*@ public normal_behavior
+      requires ante >= 0;
       ensures 0 <= \result;
       ensures ante == \result;
    */
   public final/*@ pure @*/double getAnte() {
-    //assert false;
+    // assert false;
+    assert false;
     return ante;
   }
 
   /**
    * @param newAnte the new ante
    */
-  /*@ requires newAnte >= 0;
+  /*@ public normal_behavior
+      requires newAnte >= 0;
       assignable ante;
       ensures ante == newAnte;
    */
   public final void setAnte(final double newAnte) {
     this.ante = newAnte;
-    //assert false;
+    // assert false;
+    assert false;
   }
 
   /**
    * @return the big blind
    */
-  /*@ requires big >= 0;
+  /*@ public normal_behavior
+      requires big >= 0;
       ensures 0 <= \result;
       ensures big == \result;
    */
   public final/*@ pure @*/double getBig() {
-    //assert false;
+    // assert false;
+    assert false;
     return big;
   }
 
   /**
    * @param newBig the new value of big blind.
    */
-  /*@ requires newBig >= 0;
+  /*@ public normal_behavior
+      requires newBig >= 0;
       assignable big;
       ensures big == newBig;
    */
   public final void setBig(final double newBig) {
     this.big = newBig;
-    //assert false;
+    // assert false;
+    assert false;
   }
 
   /**
    * @return the small
    */
-  /*@ requires small >= 0;
+  /*@ public normal_behavior 
+      requires small >= 0;
       ensures 0 <= \result;
       ensures small == \result;
    */
   public final/*@ pure @*/double getSmall() {
-    //assert false;
+    // assert false;
+    assert false;
     return small;
   }
 
   /**
    * @param newSmall the new small blind value
    */
-  /*@ requires newSmall >= 0;
+  /*@ public normal_behavior
+      requires newSmall >= 0;
       assignable small;
       ensures small == newSmall;
    */
   public final void setSmall(final double newSmall) {
     this.small = newSmall;
-    //assert false;
+    // assert false;
+    assert false;
   }
 }

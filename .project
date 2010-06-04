@@ -46,6 +46,11 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
+		<buildCommand>
+			<name>mobius.escjava2.ui.autocheckEscjavaBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
@@ -57,5 +62,6 @@
 		<nature>net.sf.eclipsecs.core.CheckstyleNature</nature>
 		<nature>com.atlassw.tools.eclipse.checkstyle.CheckstyleNature</nature>
 		<nature>mobius.escjava2.plugin.autocheckEscjavaNature</nature>
+		<nature>mobius.escjava2.ui.autocheckEscjavaNature</nature>
 	</natures>
 </projectDescription>

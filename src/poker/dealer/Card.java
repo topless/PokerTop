@@ -26,8 +26,8 @@ public/* nullable_by_default */class Card {
   /** The value. */
   private/*@ spec_public @*/int rank;
 
-  //@ invariant MIN_RANK <= rank && MAX_RANK >= rank;
-  //@ invariant MIN_SUIT <= suit && MAX_SUIT >= suit;
+  //@ public invariant MIN_RANK <= rank & rank <= MAX_RANK;
+  //@ public invariant MIN_SUIT <= suit & suit <= MAX_SUIT;
 
   /**
    * Instantiates a new card.
@@ -36,15 +36,14 @@ public/* nullable_by_default */class Card {
    * @param cardSuit
    *          Suit of the card.
    */
-   /*@ requires MIN_RANK <= cardRank;
-       requires MAX_RANK >= cardRank;
-       requires MIN_SUIT <= cardSuit;
-       requires MAX_SUIT >= cardSuit;
+   /*@ public normal_behavior
+       requires MIN_RANK <= cardRank & cardRank <= MAX_RANK;
+       requires MIN_SUIT <= cardSuit & cardSuit <= MAX_SUIT ;
+       assignable rank, suit;
        ensures rank == cardRank;
        ensures suit == cardSuit;
     */
   public Card(final int cardRank, final int cardSuit) {
-    // public normal_behavior
     this.rank = cardRank;
     this.suit = cardSuit;
   }
@@ -52,13 +51,14 @@ public/* nullable_by_default */class Card {
   /**
    * @param newRank the new value
    */
-  /*@ requires newRank >=2 && newRank <= 14;
+  /*@ public normal_behavior
+      requires MIN_RANK <= newRank && newRank <= MAX_RANK;
       assignable rank;
       ensures rank == newRank;
    */
   public final void setRank(final int newRank) {
     this.rank = newRank;
-    //@ assert false;
+    // assert false;
     assert false;
   }
 
@@ -67,7 +67,7 @@ public/* nullable_by_default */class Card {
    */
   //@ ensures \result == rank;
   public final/*@ pure @*/ int getRank() {
-    //@ assert false;
+    // assert false;
     assert false;
     return this.rank;
   }
@@ -75,12 +75,14 @@ public/* nullable_by_default */class Card {
   /**
    * @param newSuit the new suit
    */
-  //@ requires newSuit >=0 && newSuit <= 3;
-  //@ assignable suit;
-  //@ ensures suit == newSuit;
+  /*@ public normal_behavior
+      requires MIN_SUIT <= newSuit && newSuit <= MAX_SUIT;
+      assignable suit;
+      ensures suit == newSuit;
+   */
   public final void setSuit(final int newSuit) {
     suit = newSuit;
-    //@ assert false;
+    // assert false;
     assert false;
   }
 
@@ -89,7 +91,7 @@ public/* nullable_by_default */class Card {
    */
   //@ ensures \result == suit;
   public final/*@ pure @*/int getSuit() {
-    //@ assert false;
+    // assert false;
     assert false;
     return suit;
   }

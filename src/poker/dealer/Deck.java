@@ -3,7 +3,6 @@
  */
 package poker.dealer;
 
-import java.util.ArrayList;
 
 /**
  * Deck of all the cards.
@@ -18,15 +17,15 @@ public/* nullable_by_default */class Deck {
   /**
    * Minimum number of players.
    */
-  public static final int MIN_NUM_OF_PLAYERS = 2;
+  public static final int MIN_PLAYERS = 2;
 
 
   /** All the cards of the deck. */
-  //TODO Define list type <Card> JMLc error too many parametes ???
-  private /*@ spec_public non_null @*/ ArrayList allCards;
+  private /*@ spec_public non_null @*/ Card[] allCards = new Card[FULL_DECK];
 
-  //@ invariant allCards.size() <= FULL_DECK && allCards.size() >= 0;
+  //@ public invariant 0 <= allCards.length & allCards.length <= FULL_DECK;
 
+  //TODO write code for ensures
 
   /**
    * Create a new Deck.
@@ -37,12 +36,13 @@ public/* nullable_by_default */class Deck {
   /**
    * Shuffle deck.
    */
-  //@ requires allCards.size() == FULL_DECK;
-  //@ assignable allCards;
-  //@ ensures allCards.size() == FULL_DECK;
+  /*@ public normal_behavior
+      requires allCards.length == FULL_DECK;
+      assignable allCards;
+      ensures allCards.length == FULL_DECK;
+   */
   public final void shuffleDeck() {
-    //Collections.shuffle(allCards);
-    //@ assert false;
+    // assert false;
     assert false;
   }
 
@@ -50,9 +50,9 @@ public/* nullable_by_default */class Deck {
    * Deal flop.
    */
   //@ assignable allCards;
-  //@ ensures allCards.size() == \old(allCards.size()) - 3;
+  // ensures allCards.length == \old(allCards.length) - 3;
   public final void dealFlop() {
-    //@ assert false;
+    // assert false;
     assert false;
   }
 
@@ -60,16 +60,14 @@ public/* nullable_by_default */class Deck {
    * Deal players.
    * @param numOfPlayers Number of players to be dealt cards.
    */
-  //@ requires numOfPlayers >= MIN_NUM_OF_PLAYERS;
-  //@ requires allCards.size() == FULL_DECK;
-  //@ assignable allCards;
-  //@ ensures allCards.size() == \old(allCards.size()) - 1;
+  //@ requires numOfPlayers >= MIN_PLAYERS;
+  //@ requires allCards.length == FULL_DECK;
+  // assignable allCards;
+  // ensures allCards.length == \old(allCards.length) - 1;
   public void dealPlayers(final int numOfPlayers) {
   /*for (int i=0; i<= numOfPlayers; i++ ){
-      allCards.pop();
-      allCards.pop();
     }*/
-    //@ assert false;
+    // assert false;
     assert false;
   }
 
@@ -77,10 +75,9 @@ public/* nullable_by_default */class Deck {
    * Deal turn.
    */
   //@ assignable allCards;
-  //@ ensures allCards.size() == \old(allCards.size()) - 1;
+  // ensures allCards.length == \old(allCards.length) - 1;
   public void dealTurn() {
-    //allCards.pop();
-    //@ assert false;
+    // assert false;
     assert false;
   }
 
@@ -88,10 +85,9 @@ public/* nullable_by_default */class Deck {
    * Deal river.
    */
   //@ assignable allCards;
-  //@ ensures allCards.size() == \old(allCards.size()) - 1;
+  // ensures allCards.length == \old(allCards.length) - 1;
   public void dealRiver() {
-    //allCards.pop();
-    //@ assert false;
+    // assert false;
     assert false;
   }
 
@@ -99,8 +95,8 @@ public/* nullable_by_default */class Deck {
    * @return all cards of the deck
    */
   //@ ensures \result == allCards;
-  public final/*@ pure @*/ArrayList getAllCards() {
-    //@ assert false;
+  public final/*@ pure @*/Card[] getAllCards() {
+    // assert false;
     assert false;
     return allCards;
   }
@@ -108,11 +104,15 @@ public/* nullable_by_default */class Deck {
   /**
    * @param newDeckOfCards Then new deck of cards.
    */
-  //@ assignable allCards;
-  //@ ensures allCards == newDeckOfCards;
-  private void setAllCards(final ArrayList newDeckOfCards) {
+  /*@ public normal_behavior
+      requires newDeckOfCards.length == FULL_DECK;
+      requires (\forall int i; 0<=i && i< newDeckOfCards.length; newDeckOfCards[i] != null);
+      assignable allCards;
+      ensures allCards == newDeckOfCards;
+   */
+  public final void setAllCards(final /*@ non_null @*/Card[] newDeckOfCards) {
     this.allCards = newDeckOfCards;
-    //@ assert false;
+    // assert false;
     assert false;
   }
 }

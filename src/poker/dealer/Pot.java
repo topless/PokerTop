@@ -10,7 +10,7 @@ public/* nullable_by_default */class Pot {
   /** The Pot size. */
   private/*@ spec_public @*/double size;
 
-  //@ invariant 0 <= size;
+  //@ public invariant 0 <= size;
 
   /** Max pot size. */
   public static final double MAX_POT_SIZE = Double.MAX_VALUE;
@@ -20,9 +20,10 @@ public/* nullable_by_default */class Pot {
    * @param initSize
    *        size to initialize pot.
    */
-  //@ requires initSize >= 0;
-  //@ assignable size;
-  //@ ensures size == initSize;
+  /*@ requires initSize >= 0;
+      assignable size;
+      ensures size == initSize;
+   */
   public Pot(final double initSize) {
     this.size = initSize;
   }
@@ -30,21 +31,26 @@ public/* nullable_by_default */class Pot {
   /**
    * @param newSize the new size
    */
-  //@ requires newSize >= 0;
-  //@ assignable size;
-  //@ ensures  size == newSize;
+  /*@ public normal_behavior
+      requires newSize >= 0;
+      assignable size;
+      ensures  size == newSize;
+   */
   public final void setSize(final double newSize) {
     this.size = newSize;
-    //@ assert false;
+    // assert false;
     assert false;
   }
 
   /**
    * @return the pot size
    */
-  //@ ensures \result == size;
+  /*@ public normal_behavior
+      ensures \result >= 0;
+      ensures \result == size;
+   */
   public final/*@ pure @*/double getSize() {
-    //@ assert false;
+    // assert false;
     assert false;
     return size;
   }
@@ -54,14 +60,15 @@ public/* nullable_by_default */class Pot {
    *
    * @param addedValue The added value to the pot.
    */
-  //@ requires addedValue >= 0;
-  //@ assignable size;
-  //@ ensures size == \old(size) + addedValue;
+  /*@ public normal_behavior
+      requires addedValue >=0;
+      requires getSize()+addedValue >= 0;
+      assignable size;
+   */
   public final void addToPotSize(final double addedValue) {
+    //TODO ensures code
     //setSize(getSize() + addedValue);
-    //@ assert false;
+    // assert false;
     assert false;
   }
-
-
 }

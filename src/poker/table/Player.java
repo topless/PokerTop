@@ -3,8 +3,7 @@
  */
 package poker.table;
 
-import java.util.List;
-
+import poker.dealer.Card;
 /**
  * A poker player.
  */
@@ -21,19 +20,19 @@ public/* nullable_by_default */class Player {
   /** The bank. */
   private/*@ spec_public @*/double bank;
 
-  /** The cards. */
-  private/*@ spec_public @*/List cards;
+  /** Player cards. */
+  private/*@ spec_public @*/Card[] cards = new Card[2];
 
   /** The name. */
   private/*@ spec_public @*/int id;
 
-  //@ invariant cards.size() >= MIN_PLAYERS_CARDS && cards.size() <= MAX_PLAYERS_CARDS;
+  //@ invariant MIN_PLAYERS_CARDS <= cards.length & cards.length <= MAX_PLAYERS_CARDS;
   //@ invariant 0 <= bank;
 
   /**
    * Instantiates a new player.
    * @param newId
-   *          players Id
+   *          player's Id
    * @param initAmount
    *          the init amount
    */
@@ -46,15 +45,13 @@ public/* nullable_by_default */class Player {
     this.bank = initAmount;
   }
 
-
-
   /**
    * @return the bank amount
    */
   //@ requires bank >= 0;
   //@ ensures \result == bank ;
   private/*@ pure @*/double getBank() {
-    //@ assert false;
+    // assert false;
     assert false;
     return this.bank;
   }
@@ -64,7 +61,7 @@ public/* nullable_by_default */class Player {
    */
   //@ ensures \result == id;
   public final/*@ pure @*/int getId() {
-    //@ assert false;
+    // assert false;
     assert false;
     return this.id;
   }
@@ -79,7 +76,7 @@ public/* nullable_by_default */class Player {
   //@ ensures bank == \old(bank) + value;
   public final void addToBank(final double value) {
     setBank(getBank() + value);
-    //@ assert false;
+    // assert false;
     assert false;
   }
 
@@ -87,27 +84,29 @@ public/* nullable_by_default */class Player {
    * Call.
    * @param betValue The value that calling costs.
    */
-  //@ requires isActive();
-  //@ requires betValue >= 0;
-  //@ requires betValue <= bank;
-  //@ assignable bank;
-  //@ ensures bank == \old(bank) - betValue;
+  /*@ requires isActive();
+      requires betValue >= 0;
+      requires betValue <= bank;
+      assignable bank;
+      ensures bank == \old(bank) - betValue;
+   */
   public final void call(final double betValue) {
     setBank(getBank() - betValue);
-    //@ assert false;
+    // assert false;
     assert false;
   }
 
   /**
    * Fold.
    */
-  //@ requires isActive();
-  //@ assignable active;
-  //@ ensures cards.size() == 0;
-  //@ ensures ! isActive();
+  /*@ requires isActive();
+      assignable active;
+      ensures cards.length == 0;
+      ensures ! isActive();
+   */
   public final void fold() {
     setActive(false);
-    //@ assert false;
+    // assert false;
     assert false;
   }
 
@@ -116,26 +115,28 @@ public/* nullable_by_default */class Player {
    * @param betValue
    *          The value of the raise bet.
    */
-  //@ requires isActive() && bank >= 0 && betValue <= bank && betValue >= 0;
-  //@ assignable bank;
-  //@ ensures bank == \old(bank) - betValue;
+  /*@ requires isActive() && bank >= 0 && betValue <= bank && betValue >= 0;
+      assignable bank;
+      ensures bank == \old(bank) - betValue;
+   */
   public final void raise(final double betValue) {
     setBank(getBank() - betValue);
-    //@ assert false;
+    // assert false;
     assert false;
   }
 
   /**
    * Show cards.
    */
-  //@ requires cards.size() >= 0;
-  //@ requires isActive();
-  //@ assignable cards, active;
-  //@ ensures cards.size() == 0;
-  //@ ensures ! isActive();
+  /*@ requires cards.length >= 0;
+      requires isActive();
+      assignable cards, active;
+      ensures cards.length == 0;
+      ensures ! isActive();
+   */   
   public final void showCards() {
     setActive(false);
-    //@ assert false;
+    // assert false;
     assert false;
   }
 
@@ -143,9 +144,9 @@ public/* nullable_by_default */class Player {
    * Stay.
    */
   //@ requires isActive();
-  //@ ensures cards.size() == MAX_PLAYERS_CARDS;
+  //@ ensures cards.length == MAX_PLAYERS_CARDS;
   public final/*@ pure @*/void stay() {
-    //@ assert false;
+    // assert false;
     assert false;
   }
 
@@ -157,7 +158,7 @@ public/* nullable_by_default */class Player {
 
   public final void subtractFromBank(final double value) {
     setBank(getBank() - value);
-    //@ assert false;
+    // assert false;
     assert false;
   }
 
@@ -168,7 +169,7 @@ public/* nullable_by_default */class Player {
   //@ assignable bank;
   public final void setBank(final double newBank) {
     this.bank = newBank;
-    //@ assert false;
+    // assert false;
     assert false;
   }
 
@@ -179,7 +180,7 @@ public/* nullable_by_default */class Player {
   //@ ensures active == status;
   public final void setActive(final boolean status) {
     this.active = status;
-    //@ assert false;
+    // assert false;
     assert false;
   }
 
@@ -189,7 +190,7 @@ public/* nullable_by_default */class Player {
    */
   //@ ensures \result == active;
   public/*@ pure @*/final boolean isActive() {
-    //@ assert false;
+    // assert false;
     assert false;
     return active;
   }
@@ -200,9 +201,9 @@ public/* nullable_by_default */class Player {
   //@ requires newCards != null;
   //@ assignable cards;
   //@ ensures cards == newCards;
-  public final void setCards(final List newCards) {    
+  public final void setCards(final Card[] newCards) {    
     this.cards = newCards;
-    //@ assert false;
+    // assert false;
     assert false;
   }
 
@@ -210,8 +211,8 @@ public/* nullable_by_default */class Player {
    * @return Player's cards.
    */
   //@ ensures \result == cards;
-  public final/*@ pure @*/List getCards() {
-    //@ assert false;
+  public final/*@ pure @*/Card[] getCards() {
+    // assert false;
     assert false;
     return cards;
   }

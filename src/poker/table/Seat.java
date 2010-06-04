@@ -32,7 +32,7 @@ public/* nullable_by_default */class Seat {
    * @return Player Id;
    */
   public final/*@ pure @*/int getPlayerId() {
-    //@ assert false;
+    // assert false;
     assert false;
     return playerId;
   }
@@ -45,7 +45,7 @@ public/* nullable_by_default */class Seat {
   //@ ensures playerId == pid;
   public final void setPlayerId(final int pid) {
     this.playerId = pid;
-    //@ assert false;
+    // assert false;
     assert false;
   }
 
@@ -54,7 +54,7 @@ public/* nullable_by_default */class Seat {
    */
   //@ ensures \result == position;
   public final/*@ pure @*/int getPosition() {
-    //@ assert false;
+    // assert false;
     assert false;
     return position;
   }

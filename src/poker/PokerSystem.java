@@ -14,8 +14,8 @@ class PokerSystem {
    * @param args the arguments
    */
   public static void main(final String[] args) {
-    //@ assert false;
-    assert false;
+    // assert false;
+    //assert false;
   }
 
 }
