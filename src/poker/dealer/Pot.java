@@ -27,6 +27,7 @@ public/* nullable_by_default */class Pot {
   public Pot(final double initSize) {
     this.size = initSize;
   }
+  
 
   /**
    * @param newSize the new size
@@ -39,7 +40,7 @@ public/* nullable_by_default */class Pot {
   public final void setSize(final double newSize) {
     this.size = newSize;
     // assert false;
-    assert false;
+    //assert false;
   }
 
   /**
@@ -51,7 +52,7 @@ public/* nullable_by_default */class Pot {
    */
   public final/*@ pure @*/double getSize() {
     // assert false;
-    assert false;
+    //assert false;
     return size;
   }
 
@@ -69,6 +70,6 @@ public/* nullable_by_default */class Pot {
     //TODO ensures code
     //setSize(getSize() + addedValue);
     // assert false;
-    assert false;
+    //assert false;
   }
 }

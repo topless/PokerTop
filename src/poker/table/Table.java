@@ -1,10 +1,4 @@
-/*
- *
- */
 package poker.table;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A poker table.
@@ -25,23 +19,24 @@ public/* nullable_by_default */class Table {
   private /*@ spec_public @*/ Dealer dealer = new Dealer();
 
   /** The list of the seats with players. */
-  private /*@ spec_public @*/ List seats = new ArrayList();
+  private /*@ spec_public @*/ int[] seats = new int[TABLE_SIZE];
 
-  //@ invariant seats.size() >= MIN_PLAYERS && seats.size() <= TABLE_SIZE;
+  //@ invariant seats.length >= MIN_PLAYERS && seats.length <= TABLE_SIZE;
 
   /**
    * Instantiates a new table.
    */
   public Table() {
+    this.dealer = new Dealer();
   }
 
   /**
    * @return seats of the table
    */
   //@ ensures \result == seats;
-  public final/*@ pure @*/List getSeats() {
+  public final/*@ pure @*/int[] getSeats() {
     // assert false;
-    assert false;
+    //assert false;
     return seats;
   }
 
@@ -49,11 +44,23 @@ public/* nullable_by_default */class Table {
    * @param initSeats set seats.
    */
   // TODO Loop through initSeats for nullity.
-  //@ assignable seats;
-  //@ ensures seats == initSeats;
-  private final void setSeats(final /*@ non_null @*/List initSeats) {
+  /*@ requires MIN_PLAYERS <= initSeats.length & initSeats.length <= TABLE_SIZE;
+      assignable seats;
+      ensures seats == initSeats;
+   */
+  public final void setSeats(final /*@ non_null @*/int[] initSeats) {
     this.seats = initSeats;
     // assert false;
-    assert false;
+    //assert false;
+  }
+  /*@ assignable dealer;
+      ensures dealer == newDealer;
+   */
+  public void setDealer(/*@ non_null @*/ final Dealer newDealer) {
+    this.dealer = newDealer;
+  }
+
+  public Dealer getDealer() {
+    return dealer;
   }
 }

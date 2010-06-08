@@ -1,5 +1,3 @@
-/*
- */
 package poker.dealer;
 
 /**
@@ -62,7 +60,7 @@ public/* nullable_by_default */class Blind {
     setSmall(newSmallBlind);
     setBig(newBigBlind);
     // assert false;
-    assert false;
+    //assert false;
   }
 
   /**
@@ -75,7 +73,7 @@ public/* nullable_by_default */class Blind {
    */
   public final/*@ pure @*/double getAnte() {
     // assert false;
-    assert false;
+    //assert false;
     return ante;
   }
 
@@ -90,7 +88,7 @@ public/* nullable_by_default */class Blind {
   public final void setAnte(final double newAnte) {
     this.ante = newAnte;
     // assert false;
-    assert false;
+    //assert false;
   }
 
   /**
@@ -103,7 +101,7 @@ public/* nullable_by_default */class Blind {
    */
   public final/*@ pure @*/double getBig() {
     // assert false;
-    assert false;
+    //assert false;
     return big;
   }
 
@@ -118,20 +116,20 @@ public/* nullable_by_default */class Blind {
   public final void setBig(final double newBig) {
     this.big = newBig;
     // assert false;
-    assert false;
+    //assert false;
   }
 
   /**
    * @return the small
    */
-  /*@ public normal_behavior 
+  /*@ public normal_behavior
       requires small >= 0;
       ensures 0 <= \result;
       ensures small == \result;
    */
   public final/*@ pure @*/double getSmall() {
     // assert false;
-    assert false;
+    //assert false;
     return small;
   }
 
@@ -146,6 +144,6 @@ public/* nullable_by_default */class Blind {
   public final void setSmall(final double newSmall) {
     this.small = newSmall;
     // assert false;
-    assert false;
+    //assert false;
   }
 }

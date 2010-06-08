@@ -1,6 +1,3 @@
-/*
- * Deck.java
- */
 package poker.dealer;
 
 
@@ -8,7 +5,6 @@ package poker.dealer;
  * Deck of all the cards.
  */
 public/* nullable_by_default */class Deck {
-
   /**
    * Number of cards of a full deck.
    */
@@ -19,18 +15,21 @@ public/* nullable_by_default */class Deck {
    */
   public static final int MIN_PLAYERS = 2;
 
-
+  private static final int MIN_RANK = poker.dealer.Card.MIN_RANK;
+  private static final int MAX_RANK = poker.dealer.Card.MAX_RANK;
+  private static final int MIN_SUIT = poker.dealer.Card.MIN_SUIT;
+  private static final int MAX_SUIT = poker.dealer.Card.MAX_SUIT;
+  
   /** All the cards of the deck. */
   private /*@ spec_public non_null @*/ Card[] allCards = new Card[FULL_DECK];
 
   //@ public invariant 0 <= allCards.length & allCards.length <= FULL_DECK;
 
-  //TODO write code for ensures
-
   /**
    * Create a new Deck.
    */
   public Deck() {
+    this.allCards = new Card[FULL_DECK];
   }
 
   /**
@@ -41,63 +40,36 @@ public/* nullable_by_default */class Deck {
       assignable allCards;
       ensures allCards.length == FULL_DECK;
    */
-  public final void shuffleDeck() {
-    // assert false;
-    assert false;
-  }
+  public final void shuffle() {
 
-  /**
-   * Deal flop.
-   */
-  //@ assignable allCards;
-  // ensures allCards.length == \old(allCards.length) - 3;
-  public final void dealFlop() {
     // assert false;
-    assert false;
+    //assert false;
   }
-
-  /**
-   * Deal players.
-   * @param numOfPlayers Number of players to be dealt cards.
+  
+  /*@ public normal_behavior
+      assignable allCards;
+      ensures allCards.length == FULL_DECK;
    */
-  //@ requires numOfPlayers >= MIN_PLAYERS;
-  //@ requires allCards.length == FULL_DECK;
-  // assignable allCards;
-  // ensures allCards.length == \old(allCards.length) - 1;
-  public void dealPlayers(final int numOfPlayers) {
-  /*for (int i=0; i<= numOfPlayers; i++ ){
-    }*/
-    // assert false;
-    assert false;
-  }
-
-  /**
-   * Deal turn.
-   */
-  //@ assignable allCards;
-  // ensures allCards.length == \old(allCards.length) - 1;
-  public void dealTurn() {
-    // assert false;
-    assert false;
-  }
-
-  /**
-   * Deal river.
-   */
-  //@ assignable allCards;
-  // ensures allCards.length == \old(allCards.length) - 1;
-  public void dealRiver() {
-    // assert false;
-    assert false;
+  public final void initilize(){
+    allCards = new Card[FULL_DECK];
+    int counter = 0;
+    for (int i = MIN_RANK; i <= MAX_RANK; i++){
+      for (int j = MIN_SUIT; j <= MAX_SUIT; j++){
+        allCards[counter] = new Card(i,j);
+        counter++;
+      }
+    }
   }
 
   /**
    * @return all cards of the deck
    */
-  //@ ensures \result == allCards;
+  /*@ public normal_behavior
+      ensures \result == allCards;
+   */
   public final/*@ pure @*/Card[] getAllCards() {
     // assert false;
-    assert false;
+    //assert false;
     return allCards;
   }
 
@@ -105,7 +77,7 @@ public/* nullable_by_default */class Deck {
    * @param newDeckOfCards Then new deck of cards.
    */
   /*@ public normal_behavior
-      requires newDeckOfCards.length == FULL_DECK;
+      requires  0 <= newDeckOfCards.length & newDeckOfCards.length <= FULL_DECK;
       requires (\forall int i; 0<=i && i< newDeckOfCards.length; newDeckOfCards[i] != null);
       assignable allCards;
       ensures allCards == newDeckOfCards;
@@ -113,6 +85,6 @@ public/* nullable_by_default */class Deck {
   public final void setAllCards(final /*@ non_null @*/Card[] newDeckOfCards) {
     this.allCards = newDeckOfCards;
     // assert false;
-    assert false;
+    //assert false;
   }
 }

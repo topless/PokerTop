@@ -1,6 +1,3 @@
-/*
- *
- */
 package poker.dealer;
 
 /**
@@ -59,7 +56,7 @@ public/* nullable_by_default */class Card {
   public final void setRank(final int newRank) {
     this.rank = newRank;
     // assert false;
-    assert false;
+    //assert false;
   }
 
   /**
@@ -68,7 +65,7 @@ public/* nullable_by_default */class Card {
   //@ ensures \result == rank;
   public final/*@ pure @*/ int getRank() {
     // assert false;
-    assert false;
+    //assert false;
     return this.rank;
   }
 
@@ -83,7 +80,7 @@ public/* nullable_by_default */class Card {
   public final void setSuit(final int newSuit) {
     suit = newSuit;
     // assert false;
-    assert false;
+    //assert false;
   }
 
   /**
@@ -92,19 +89,19 @@ public/* nullable_by_default */class Card {
   //@ ensures \result == suit;
   public final/*@ pure @*/int getSuit() {
     // assert false;
-    assert false;
+    //assert false;
     return suit;
   }
 
 
- static class Suit {
+ public static class Suit {
     public static final int CLUBS = 0;
     public static final int DIAMONDS = 1;
     public static final int HEARTS = 2;
     public static final int SPADES = 3;
   }
 
- static class Rank {
+ public static class Rank {
     public static final int DEUCE = 2;
     public static final int THREE = 3;
     public static final int FOUR = 4;

@@ -1,6 +1,3 @@
-/*
- *
- */
 package poker.dealer;
 
 /**
@@ -46,7 +43,7 @@ public/* nullable_by_default */class Button {
   public final void setPosition(final int newPosition) {
     this.position = newPosition;
     // assert false;
-    assert false;
+    //assert false;
   }
   /**
    * Next dealer.
@@ -54,6 +51,6 @@ public/* nullable_by_default */class Button {
   public final/*@ pure @*/void nextDealer() {
     //TODO table calculations to find next valid position.
     // assert false;
-    assert false;
+    //assert false;
   }
 }
